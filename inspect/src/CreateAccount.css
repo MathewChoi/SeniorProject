@@ -1,0 +1,80 @@
+.ca-container {
+	width:					100%;
+	min-height:				100vh;
+	background-size:		cover;
+	background:				linear-gradient(to bottom right, rgba(0, 31, 63, 0.8), rgba(90, 121, 153, 0.8));
+	display:				flex;
+    align-items:			center;
+    justify-content:		center;
+    flex-direction:			column;
+}
+
+.ca-logo {
+	height:					80px;
+	/*Orange: #FF0043*/
+}
+
+.ca-form {
+	width:					400px;
+	min-width:				300px;
+	height:					400px;
+	min-height:				300px;
+	/*background-color:		#000000;*/
+	border-radius:			15px;
+	display:				flex;
+    align-items:			center;/*flex-start;*/
+    justify-content:		center;
+    flex-direction:			column;
+}
+
+.ca-form-header {
+	font-family:			'Open Sans';
+	font-size:				0.9em;
+	color:					rgba(255, 255, 255, 0.2);
+	float:					left;
+	width:					100%;
+	padding-left:			100px;
+	margin-top:				40px;
+}
+
+.ca-form-input {
+	border:					0;
+	border-bottom:			2px solid rgba(255, 255, 255, 0.5);
+	transition:				ease-in-out,
+							border-bottom 0.25s ease-in-out,
+							color 0.25s ease-in-out;
+	background:				transparent;
+	font-size:				1.0em;
+	line-height:			25px;
+	width:					300px;
+	height: 				18px;
+	padding-left:			10px;
+	padding-right:			10px;
+	color:					rgba(255, 255, 255, 0.5);
+}
+
+.ca-form-input:focus {
+	outline:				0;
+	color:					rgba(255, 255, 255, 1.0);
+	border-bottom:			2px solid rgba(255, 255, 255, 1.0);
+}
+
+.ca-form-submit {
+	font-family:			'Open Sans';
+	font-size:				1.2em;
+	font-weight:			600;
+	color:					rgba(60, 91, 123, 0.8);
+	outline:				0;
+	border:					none;
+	width:					90%;
+	text-align:				center;
+    text-decoration:		none;
+	margin-top:				50px;
+	display:				inline-block;
+	border-radius:			2px;
+	padding:				10px;
+}
+
+.ca-form-submit:hover {
+	outline:				0;
+}
