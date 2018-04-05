@@ -1,14 +1,18 @@
 import React from 'react';
-import './App.css';
+import './stylesheets/App.css';
 import Main from './components/Main';
 import Navbar from './components/Navbar';
-
-const App = () => (
-  <div>
+/**
+<div>
     <Navbar />
     <div className="container">
       <Main />
     </div>
+  </div>
+**/
+const App = () => (
+  <div>
+	<Main />
   </div>
 )
 
