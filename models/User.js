@@ -15,8 +15,15 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    enum: ['GUEST', 'PERSONNEL', 'ADMIN'],
+    default: 'GUEST',
+    required: true
+  },
   issues: [{ type: Schema.Types.ObjectId, ref: 'Issue' }]
-});
+},
+{ timestamps: true });
 
 // Hash password using bcrypt
 UserSchema.pre('save', function(next) {

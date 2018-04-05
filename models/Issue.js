@@ -18,6 +18,11 @@ var IssueSchema = new Schema({
   room: {
     type: String,
   },
+  category: {
+    type: String,
+    enum : ['PLUMMING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'],
+    default: 'PLUMMING'
+  },
   creator: {
     type: Schema.Types.ObjectId, ref: 'User'
   }
