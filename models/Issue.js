@@ -23,6 +23,14 @@ var IssueSchema = new Schema({
     enum : ['PLUMMING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'],
     default: 'PLUMMING'
   },
+  status: {
+    type: String,
+    enum : ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'],
+    default: 'OPEN'
+  },
+  statusDescription: {
+    type: String,
+  },
   creator: {
     type: Schema.Types.ObjectId, ref: 'User'
   }
