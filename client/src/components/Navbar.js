@@ -34,6 +34,7 @@ class Navbar extends Component {
         <Link className="p-2 text-dark" to="/issues">Issues</Link>
         <Link className="p-2 text-dark" to="/issues/create">Create Issues</Link>
         <Link className="p-2 text-dark" to="/about">About</Link>
+        <Link className="p-2 text-dark" to="/dashboard">Dashboard</Link>
         </nav>
         {button}
       </div>
