@@ -16,12 +16,7 @@ module.exports = {
   register: async (req, res, next) => {
     const newUser = new User(req.body);
     const user = await newUser.save();
-    console.log(user);
-    if(!user) {
-      res.status(409).json({message: "User already exists"});
-    } else {
-      res.status(201).json(user); // 201 - Created
-    }  
+    res.status(201).json(user); // 201 - Created
     
   },
 
