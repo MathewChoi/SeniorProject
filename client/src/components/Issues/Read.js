@@ -41,6 +41,9 @@ class ReadIssue extends Component {
           <p>Building: {issue.building}</p>
           <p>Floor: {issue.floor}</p>
           <p>Room: {issue.room}</p>
+          <p>Category: {issue.category}</p>
+          <p>Status: {issue.status}</p>
+          <p>Status Description: {issue.statusDescription}</p>
           <p>Created At: {issue.createdAt}</p>
           
           <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link>

@@ -22,20 +22,20 @@ class CreateIssue extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const { name, description, building, floor, room } = this.state;
+    const { name, description, building, floor, room, category } = this.state;
 
-    axios.get('/api/users/newIssue',
-    { headers: {
-      "Authorization": localStorage.getItem('token'),
-      name, description, building, floor, room
-    }})
+    axios.post('/api/issues',
+    { name, description, building, floor, room, category})
     .then((res) => {
       console.log(res);
     });
+    this.props.history
+    .push("/issues");
   }
 
   render() {
-    const { name, description, building, floor, room } = this.state;
+    const { name, description, building, floor, room, category } = this.state;
+    const categories = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -61,7 +61,18 @@ class CreateIssue extends Component {
             <label>room</label>
             <input type="text" className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="room" />
           </div>
-          
+          <div className="form-group">
+            <label>category</label>
+            <select class="form-control" name="category" value={category} onSelect={this.onSelect}>
+              <option >{categories[0]}</option>
+              <option>{categories[1]}</option>
+              <option >{categories[2]}</option>
+              <option>{categories[3]}</option>
+              <option >{categories[4]}</option>
+              <option>{categories[5]}</option>
+              <option >{categories[6]}</option>
+            </select>
+          </div>
           <button className="btn btn-lg btn-primary btn-block" type="submit">Create</button>
 
         </form>

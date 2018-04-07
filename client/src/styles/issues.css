@@ -1,0 +1,23 @@
+.dark{
+    border-bottom: 200px;
+    border-bottom-color: black;
+    width: 100%;
+    margin-bottom: 20px; 
+    
+}
+
+.title{
+    color: black;
+    font-size: 2em;
+}
+
+.spacing{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 20px;
+    
+}
+
+.location{
+    display: inline-flex;
+}

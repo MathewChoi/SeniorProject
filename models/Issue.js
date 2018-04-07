@@ -20,8 +20,8 @@ var IssueSchema = new Schema({
   },
   category: {
     type: String,
-    enum : ['PLUMMING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'],
-    default: 'PLUMMING'
+    enum : ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'],
+    default: 'PLUMBING'
   },
   status: {
     type: String,
