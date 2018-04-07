@@ -6,7 +6,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      message: ''
+      user: ''
     };
   }
 
@@ -17,17 +17,19 @@ class Dashboard extends Component {
       }
     })
     .then((res) => {
-      this.setState({message: res.data});
+      console.log(res.data);
+      this.setState({user: res.data});
     });
   }
 
   render() {
-    const { message } = this.state;
+    const { user } = this.state;
     return (
       <div>
-        <h1>{message}</h1>
-        <p>Your JWT Token: {localStorage.getItem('token')}</p>
-        { !localStorage.getItem('token') && <h1>Not authorized</h1>}
+        <h1>It worked!</h1>
+        <p>Email: {user.email}</p>
+        <p>User ID: {user._id}</p>
+        <p>Role: {user.role}</p>
       </div>
     );
   }

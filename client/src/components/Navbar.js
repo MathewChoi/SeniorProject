@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Auth from './Helpers/Authentication';
 
 
 class Navbar extends Component {
@@ -21,7 +22,7 @@ class Navbar extends Component {
 
   render() {
 
-    const button = localStorage.getItem('token') ? (
+    const button = Auth.isAuthenticated() ? (
       <Link className="btn btn-outline-primary" to="/logout">Sign out</Link>
     ) : (
       <Link className="btn btn-outline-primary" to="/login">Sign in</Link>

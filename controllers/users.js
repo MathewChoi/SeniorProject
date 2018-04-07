@@ -90,7 +90,7 @@ module.exports = {
   },
 
   getDashboard: (req, res, next) => {
-    res.send('It worked! User id is: ' + req.user.email + '.');
+    res.status(200).json(req.user);
   },
 
   newIssue: async (req, res, next) => {
