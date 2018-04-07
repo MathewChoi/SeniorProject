@@ -12,7 +12,9 @@ router.route('/auth')
   .post(UsersController.auth);
 
 // Authenticated route new issue can not be created without jwt token supplied at login
-router.post('/newIssue', passport.authenticate('jwt', {session: false}), UsersController.newIssue);
+router.post('/newIssue', 
+  passport.authenticate('jwt', { session: false }),
+  UsersController.newIssue);
 
 // Example of required auth: protect dashboard route with JWT
 router.get('/dashboard',

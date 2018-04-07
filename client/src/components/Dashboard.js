@@ -11,14 +11,13 @@ class Dashboard extends Component {
   }
 
   componentWillMount(){
-    axios.get('/api/users/dashboard',
-    { headers: {
-      "Authorization": localStorage.getItem('token')
-      }
-    })
+    
+    axios.get('/api/users/dashboard', { headers: {"Authorization": localStorage.getItem('token')}} )
     .then((res) => {
       console.log(res.data);
       this.setState({user: res.data});
+    }).catch(err =>{
+      console.log(err);
     });
   }
 

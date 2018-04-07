@@ -94,8 +94,11 @@ module.exports = {
   },
 
   newIssue: async (req, res, next) => {
+
+
     // Get Id from url
     const userId  = req.user._id;
+    console.log(userId);
     // Create new issue
     const newIssue = new Issue({
       "name": req.body.name,

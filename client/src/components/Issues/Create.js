@@ -19,19 +19,20 @@ class CreateIssue extends Component {
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
-
+  
   onSubmit = (e) => {
     e.preventDefault();
     const { name, description, building, floor, room } = this.state;
-
-    axios.get('/api/users/newIssue',
-    { headers: {
-      "Authorization": localStorage.getItem('token'),
-      name, description, building, floor, room
-    }})
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
+    const data = { name, description, building, floor, room }
+    
+    axios.post('/api/users/newIssue', data, header)
     .then((res) => {
-      console.log(res);
+      this.props.history.push("/issues");
+    }).catch(err => {
+      console.log(err);
     });
+
   }
 
   render() {
