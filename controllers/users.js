@@ -61,13 +61,23 @@ module.exports = {
         // Check if password matches
         user.comparePassword(req.body.password, function(err, isMatch) {
           if (isMatch && !err) {
+
+            // Only pass email id and role as the payload instead of entire user object
+            // User object can become large because it has a list of all their issues
+            // only pass neccessary data to identify the user in the backend
+            const payload = {
+              "email": user.email,
+              "_id": user._id,
+              "role": user.role,
+            }
+
             // Create token if the password matched and no error was thrown
-            const token = jwt.sign(user.toObject(), config.auth.secret, {
+            const token = jwt.sign(payload, config.auth.secret, {
               expiresIn: "2 days"
             });
             res.json({
               success: true,
-              message: 'Authentication successfull',
+              message: 'Authentication successful',
               token
             });
           } else {

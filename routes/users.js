@@ -13,6 +13,12 @@ router.route('/auth')
   // Signin returns jwt
   .post(UsersController.auth);
 
+// Example of required auth: protect dashboard route with JWT
+router.route('/dashboard')
+  .get(
+    passport.authenticate('jwt', { session: false }),
+    UsersController.getDashboard);
+    
 router.route('/:userId')
   // Get user details
   .get(UsersController.getUser)
@@ -21,10 +27,5 @@ router.route('/:userId')
   // Update user information by patching
   .patch(UsersController.updateUser);
 
-// Example of required auth: protect dashboard route with JWT
-router.get('/dashboard',
-  // Passport middleware
-  passport.authenticate('jwt', { session: false }),
-  UsersController.getDashboard);
 
 module.exports = router;

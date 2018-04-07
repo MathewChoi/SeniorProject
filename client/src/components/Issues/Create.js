@@ -11,6 +11,7 @@ class CreateIssue extends Component {
       building: '',
       floor: '',
       room: '',
+      category: 'PLUMMING',
     };
   }
 
@@ -20,12 +21,13 @@ class CreateIssue extends Component {
     this.setState(state);
   }
   
+  
   onSubmit = (e) => {
     e.preventDefault();
-    const { name, description, building, floor, room } = this.state;
+    const { name, description, building, floor, room, category } = this.state;
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
-    const data = { name, description, building, floor, room }
-    
+    const data = { name, description, building, floor, room , category}
+
     axios.post('/api/issues', data, header)
     .then((res) => {
       this.props.history.push("/issues");
@@ -36,7 +38,8 @@ class CreateIssue extends Component {
   }
 
   render() {
-    const { name, description, building, floor, room } = this.state;
+    const { name, description, building, floor, room, category } = this.state;
+    const options = ['PLUMMING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -47,21 +50,32 @@ class CreateIssue extends Component {
             <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} required placeholder="name" />
           </div>
           <div className="form-group">
-            <label>description</label>
+            <label>Description</label>
             <input type="text" className="form-control" name="description" value={description} onChange={this.onChange} required placeholder="description" />
           </div>
           <div className="form-group">
-            <label>building</label>
+            <label>Building</label>
             <input type="text" className="form-control" name="building" value={building} onChange={this.onChange} required placeholder="building" />
           </div>
           <div className="form-group">
-            <label>floor</label>
+            <label>Floor</label>
             <input type="text" className="form-control" name="floor" value={floor} onChange={this.onChange} required placeholder="floor" />
           </div>
           <div className="form-group">
-            <label>room</label>
+            <label>Room</label>
             <input type="text" className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="room" />
           </div>
+          <div className="form-group">
+            <label>Category</label>
+            <select className="form-control" name="category" value={category} onChange={this.onChange}>
+              {options.map((option, i) => {
+                return (
+                  <option value={option} key={i}>{option}</option>
+                )
+              })}
+            </select>
+          </div>
+          
           
           <button className="btn btn-lg btn-primary btn-block" type="submit">Create</button>
 

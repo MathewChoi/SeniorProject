@@ -20,14 +20,14 @@ module.exports = {
   create: async (req, res, next) => {
     // Get Id from url
     const userId  = req.user._id;
-    console.log(userId);
     // Create new issue
     const newIssue = new Issue({
       "name": req.body.name,
       "description": req.body.description,
       "building": req.body.building,
       "floor": req.body.floor,
-      "room": req.body.room
+      "room": req.body.room,
+      "category": req.body.category,
     });
     // Get user
     const user = await User.findById(userId);
