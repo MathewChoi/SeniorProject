@@ -17,7 +17,6 @@ module.exports = {
     const newUser = new User(req.body);
     const user = await newUser.save();
     res.status(201).json(user); // 201 - Created
-    
   },
 
   // Get User information
@@ -91,34 +90,6 @@ module.exports = {
 
   getDashboard: (req, res, next) => {
     res.status(200).json(req.user);
-  },
-
-  newIssue: async (req, res, next) => {
-
-
-    // Get Id from url
-    const userId  = req.user._id;
-    console.log(userId);
-    // Create new issue
-    const newIssue = new Issue({
-      "name": req.body.name,
-      "description": req.body.description,
-      "building": req.body.building,
-      "floor": req.body.floor,
-      "room": req.body.room
-    });
-    // Get user
-    const user = await User.findById(userId);
-    // Assign user and issue creator
-    newIssue.creator = user;
-    // Save the issue
-    await newIssue.save();
-    // Add the new issue to the users issue array
-    user.issues.push(newIssue);
-    // Save the updated user
-    await user.save();
-    // Send status code 201 - Created and new Issue as json
-    res.status(201).json(newIssue);
   },
 
 }

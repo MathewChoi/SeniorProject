@@ -26,7 +26,7 @@ class CreateIssue extends Component {
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
     const data = { name, description, building, floor, room }
     
-    axios.post('/api/users/newIssue', data, header)
+    axios.post('/api/issues', data, header)
     .then((res) => {
       this.props.history.push("/issues");
     }).catch(err => {
