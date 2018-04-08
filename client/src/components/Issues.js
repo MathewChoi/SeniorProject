@@ -46,6 +46,7 @@ class Issues extends Component {
               <p className="spacing">Category: {issue.category}</p>
               <p className="spacing">Status: {issue.status}</p>
               <p className="spacing">Created At: {issue.createdAt}</p>
+        
             </div>
           )
         })}
