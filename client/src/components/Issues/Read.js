@@ -33,6 +33,9 @@ class ReadIssue extends Component {
 
   render() {
     const issue = this.state.issue;
+    var date = new Date (String(issue.createdAt).substring(0,19));
+    var time =String(issue.createdAt).substring(11,16);
+    var dateCreated = (date.getMonth()+1)+"-" + (date.getDate()) + "-" +date.getFullYear() + "   " + time ;
     return (
       <div>
         <h1>Issues</h1>
@@ -44,7 +47,7 @@ class ReadIssue extends Component {
           <p>Category: {issue.category}</p>
           <p>Status: {issue.status}</p>
           <p>Status Description: {issue.statusDescription}</p>
-          <p>Created At: {issue.createdAt}</p>
+          <p>Created At: {dateCreated}</p>
           
           <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link>
           <button onClick={this.onDelete.bind(this, this.state.issue._id)} className="btn btn-outline-danger">Delete</button>

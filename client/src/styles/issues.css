@@ -1,11 +1,17 @@
 .dark{
-    border-bottom: 200px;
-    border-bottom-color: black;
     width: 100%;
-    margin-bottom: 20px; 
+    
+    margin-bottom: 10px; 
     
 }
 
+.dark:nth-child(odd){
+    background-color: #C8C8C8 ;
+    border-bottom: black 2px ;
+    border-bottom-style: solid;
+    border-top: black 2px ;
+    border-top-style: solid;
+}
 .title{
     color: black;
     font-size: 2em;
