@@ -15,6 +15,8 @@ router.route('/')
 router.route('/users/:userId')
   .get(IssuesController.userIssues);
 
+router.route('/stats')
+  .get(IssuesController.issuesStats);
 /* GET SINGLE ISSUE BY ID */
 router.route('/:id')
   .get(IssuesController.read)

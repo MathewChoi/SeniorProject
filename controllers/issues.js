@@ -5,8 +5,19 @@ module.exports = {
 
   // get all issues
   index: async (req, res, next) => {
-    const issues = await Issue.find({});
+    const issues = await Issue.find({}).sort( {"createdAt" : -1});
     res.status(200).json(issues);
+  },
+
+  // get issues stats
+  issuesStats: async (req, res, next) => {
+    const openCount = await Issue.find({"status":"OPEN"}).count();
+    const closedCount = await Issue.find({"status":"CLOSED"}).count();
+    const inProgressCount = await Issue.find({"status":"IN PROGRESS"}).count();
+    const assignedCount = await Issue.find({"status":"ASSIGNED"}).count();
+    const onHoldCount = await Issue.find({"status":"ON HOLD"}).count();
+    res.status(200).json({openIssues:openCount, closedIssues:closedCount, inProgressIssues:inProgressCount,
+                          assignedIssues:assignedCount, onHoldIssues:onHoldCount});
   },
 
   // View all issues created by user

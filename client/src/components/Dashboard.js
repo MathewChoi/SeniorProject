@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/Dashboard.css';
 
 class Dashboard extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: ''
+      user: '', IssuesStats:'', userIssues:[]
     };
   }
 
@@ -18,10 +20,26 @@ class Dashboard extends Component {
     }).catch(err =>{
       console.log(err);
     });
-  }
 
+    axios.get('/api/issues/stats')
+    .then((res)=>{
+      this.setState({IssuesStats: res.data});
+    }).catch(err =>{
+      console.log(err);
+    });
+
+    axios.get('/api/users/'+this.state.user._id)
+    .then((res)=>{
+      this.setState({userIssues: res.data});
+    }).catch(err =>{
+      console.log(err);
+    });
+  }
+  
   render() {
-    const { user } = this.state;
+    
+    const IssuesStats = this.state.IssuesStats;
+    const userIssues = this.state.userIssues;
     const MONTH_NAMES = ["January ", "February ", "March ", "April ", "May ", "June ",
     "July ", "August ", "September ", "October ", "November ", "December "];
 
@@ -29,9 +47,38 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>{DAY_NAMES[new Date().getDay()]}, {MONTH_NAMES[new Date().getMonth()]} {new Date().getDate()}, {new Date().getFullYear()}</h1>
-        <p>Email: {user.email}</p>
-        <p>User ID: {user._id}</p>
-        <p>Role: {user.role}</p>
+        
+        <div className="dashboard-row">
+          <div className="box">
+            <h3 className="box-header"> Open Issues</h3>
+            <div className="pic-text">
+              <h4 className="text"> {IssuesStats.openIssues} Issues </h4>
+            </div>
+          </div>
+          <div className="box">
+            <h3 className="box-header"> Issues In-progress</h3>
+            <div className="pic-text">
+              <h4 className="text"> {IssuesStats.inProgressIssues} Issues </h4>
+            </div>
+          </div>
+          <div className="box">
+            <h3 className="box-header"> Closed Issues</h3>
+            <div className="pic-text">
+              <h4 className="text"> {IssuesStats.closedIssues} Issues </h4>
+            </div>
+          </div>
+        </div>
+
+        <h2>My Posted Issues</h2>
+        {userIssues.map((issue, i) => {
+          return (
+            <li key={i}>
+              <Link to={`/issues/${issue._id}`}>
+                {issue.name}
+              </Link>
+            </li>
+          )
+        })}
       </div>
     );
   }
