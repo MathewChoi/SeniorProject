@@ -8,7 +8,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '', IssuesStats:'', userIssues:[]
+      user: '', IssuesStats:'', latestIssues:[]
     };
   }
 
@@ -19,27 +19,28 @@ class Dashboard extends Component {
       this.setState({user: res.data});
     }).catch(err =>{
       console.log(err);
-    });
 
+    });
     axios.get('/api/issues/stats')
     .then((res)=>{
       this.setState({IssuesStats: res.data});
     }).catch(err =>{
       console.log(err);
     });
-
-    axios.get('/api/users/'+this.state.user._id)
+    
+    axios.get('/api/issues/latest-issues')
     .then((res)=>{
-      this.setState({userIssues: res.data});
+      this.setState({latestIssues: res.data});
     }).catch(err =>{
       console.log(err);
     });
   }
-  
+    
   render() {
     
     const IssuesStats = this.state.IssuesStats;
-    const userIssues = this.state.userIssues;
+    const latestIssues = this.state.latestIssues;
+    const user = this.state.user;
     const MONTH_NAMES = ["January ", "February ", "March ", "April ", "May ", "June ",
     "July ", "August ", "September ", "October ", "November ", "December "];
 
@@ -47,7 +48,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>{DAY_NAMES[new Date().getDay()]}, {MONTH_NAMES[new Date().getMonth()]} {new Date().getDate()}, {new Date().getFullYear()}</h1>
-        
+        <p>User ID: {user._id}</p>
         <div className="dashboard-row">
           <div className="box">
             <h3 className="box-header"> Open Issues</h3>
@@ -69,8 +70,8 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        <h2>My Posted Issues</h2>
-        {userIssues.map((issue, i) => {
+        <h2>Latest Posted Issues</h2>
+        {latestIssues.map((issue, i) => {
           return (
             <li key={i}>
               <Link to={`/issues/${issue._id}`}>

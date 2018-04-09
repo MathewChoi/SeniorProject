@@ -20,6 +20,10 @@ module.exports = {
                           assignedIssues:assignedCount, onHoldIssues:onHoldCount});
   },
 
+  latestIssues: async (req, res, next) => {
+    const latestIssues = await Issue.find({}).sort( {"createdAt" : -1}).limit(10);
+    res.status(200).json(latestIssues);
+  },
   // View all issues created by user
   userIssues: async (req, res, next) => {
     const { userId } = req.params;
