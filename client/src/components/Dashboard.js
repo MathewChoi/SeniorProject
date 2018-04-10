@@ -48,7 +48,7 @@ class Dashboard extends Component {
     return (
       <div>
         <h1>{DAY_NAMES[new Date().getDay()]}, {MONTH_NAMES[new Date().getMonth()]} {new Date().getDate()}, {new Date().getFullYear()}</h1>
-        <p>User ID: {user._id}</p>
+        
         <div className="dashboard-row">
           <div className="box">
             <h3 className="box-header"> Open Issues</h3>
