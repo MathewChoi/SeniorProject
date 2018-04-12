@@ -4,18 +4,22 @@
 	/*height:					400px;*/
 	min-height:				300px;
 	/*background-color:		#000000;*/
-	border-radius:			15px;
+	border-radius:			4px;
 	display:				flex;
     align-items:			center;/*flex-start;*/
     justify-content:		center;
     flex-direction:			column;
-	
+	background-color:		#FFF;
+	/*padding-top:			1vw;*/
+	padding-left:			2vw;
+	padding-right:			2vw;
+	padding-bottom:			2vw;
 }
 
 .ca-form-header {
 	font-family:			'Open Sans';
 	font-size:				0.9em;
-	color:					rgba(255, 255, 255, 0.2);
+	color:					rgba(0, 0, 0, 0.2);/*rgba(255, 255, 255, 0.2);*/
 	float:					left;
 	width:					100%;
 	/*padding-left:			2vw;*/
@@ -24,7 +28,7 @@
 
 .ca-form-input {
 	border:					0;
-	border-bottom:			2px solid rgba(255, 255, 255, 0.5);
+	border-bottom:			2px solid rgba(0, 0, 0, 0.2);/*2px solid rgba(255, 255, 255, 0.5);*/
 	transition:				ease-in-out,
 							border-bottom 0.25s ease-in-out,
 							color 0.25s ease-in-out;
@@ -35,20 +39,25 @@
 	height: 				20px;
 	padding-left:			10px;
 	padding-right:			10px;
-	color:					rgba(255, 255, 255, 0.5);
+	color:					rgba(0, 0, 0, 0.5);
+}
+
+.ca-form-text {
+	color:					rgba(0, 0, 0, 0.5);
+	padding-top:			10px;
 }
 
 .ca-form-input:focus {
 	outline:				0;
-	color:					rgba(255, 255, 255, 1.0);
-	border-bottom:			2px solid rgba(255, 255, 255, 1.0);
+	color:					rgba(0, 0, 0, 1.0); /*rgba(255, 255, 255, 1.0);*/
+	border-bottom:			2px solid rgba(0, 0, 0, 0.6);/*2px solid rgba(255, 255, 255, 1.0);*/
 }
 
 .ca-form-submit {
 	font-family:			'Open Sans';
 	font-size:				1.2em;
 	font-weight:			600;
-	color:					rgba(60, 91, 123, 0.8);
+	color:					rgba(255, 255, 255, 0.8); /*rgba(60, 91, 123, 0.8);*/
 	outline:				0;
 	border:					none;
 	width:					90%;
@@ -58,13 +67,13 @@
 	display:				inline-block;
 	border-radius:			2px;
 	padding:				10px;
-	background-color:		rgba(255,255,255,0.8);
+	background-color:		rgba(0, 168, 107, 0.8); /*rgba(255,255,255,0.8);*/
 	transition:				color 0.25s ease-in-out,
 							background-color 0.25s ease-in-out;
 }
 
 .ca-form-submit:hover {
 	outline:				0;
-	background-color:		rgba(255, 255, 255, 1.0);
-	color:					rgba(60, 91, 123, 1.0);
+	background-color:		rgba(0, 168, 107, 1.0);
+	color:					rgba(255, 255, 255, 1.0); /*rgba(60, 91, 123, 1.0);*/
 }

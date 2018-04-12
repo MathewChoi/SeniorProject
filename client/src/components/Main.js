@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Issues from './Issues';
 import Home from './Home';
 import LandingPage from './LandingPage'
+import HomePage from './HomePage';
 import About from './About';
 import ReadIssue from './Issues/Read';
 import CreateIssue from './Issues/Create';

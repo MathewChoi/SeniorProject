@@ -5,6 +5,8 @@ import Navbar from './Navbar';
 import team_logo from './../resources/inSpect-logo.svg';
 /*import './App.css';*/
 import './../stylesheets/LandingPage.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const temp = {background: 'red'};
 const temp2 = {background: 'black'};
@@ -19,6 +21,7 @@ export default class LandingPage extends Component {
 		return (
 			<div className="">
 				<div className="lp-page lp-container">
+					<div className="lp-layer"></div>
 					<div className="lp-item lp-left-spacer"/* style={temp}*/>
 						<div className="lp-title">
 							Welcome to FixBit.
@@ -30,7 +33,7 @@ export default class LandingPage extends Component {
 					<div className="lp-item lp-center"/* style={temp2}*/>
 						<hr className="lp-vl" />
 					</div>
-					<div className="lp-item lp-right-spacer"/* style={temp3}*/>
+					<div className="lp-item lp-right-spacer" /*style={temp3}*/>
 						<CreateAccountForm/>
 					</div>
 				</div>

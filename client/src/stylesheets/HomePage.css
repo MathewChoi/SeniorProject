@@ -1,0 +1,39 @@
+.red {
+	background-color: red;
+}
+
+.green {
+	background-color: green;
+}
+
+.blue {
+	background-color: blue;
+}
+
+.hp-page {
+	width:					100%;
+	min-height:				100vh;
+	background-size:		cover;
+	background-image:		url("./../resources/conference.png");
+}
+
+.hp-title {
+	font:					'Open Sans';
+	color:					rgba(255, 255, 255, 1.0);
+	font-size:				4.0em;
+	/*min-width:				72vh;*/
+	line-height:			8vh;
+	/*white-space:			nowrap;
+	overflow:				hidden;*/
+	
+}
+
+.hp-text {
+	/*display: block;*/
+	font:					'Open Sans';
+	color:					rgba(255, 255, 255, 0.7);
+	font-size:				1.2em;
+	font-style:				italic;
+	font-weight:			200;
+	/*max-width:				50%;*/
+}
