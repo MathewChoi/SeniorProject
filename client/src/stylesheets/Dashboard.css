@@ -1,0 +1,51 @@
+.db-sidenav {
+	height: 100%; 
+    width: 250px; 
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.db-title {
+	font-family: 'Open Sans';
+	color: rgba(255, 255, 255, 0.8);
+	font-weight: 200;
+}
+
+.db-icon {
+	width: 6%;
+	margin-left: 1vh;
+}
+
+.db-text {
+	margin-left: 1vh;
+}
+
+.red {
+	color: red;
+}
+
+.blue {
+	color: blue;
+}
+
+.green {
+	background-color: green;
+}
+
+.db-sidenav-item {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 1vh;
+	color: white;
+}
+
+.db-sidenav li:hover {
+	color:red;
+}
+
