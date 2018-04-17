@@ -37,6 +37,7 @@ class Dashboard extends Component {
       console.log(err);
     });
   }
+
     render() {
 		return(
 			<div className="db-sidenav">
@@ -57,6 +58,8 @@ class Dashboard extends Component {
 		);
 	}
   /*render() {
+    
+  render() {
     
     const IssuesStats = this.state.IssuesStats;
     const latestIssues = this.state.latestIssues;
@@ -89,8 +92,7 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-
-        <h2>Latest Posted Issues</h2>
+        <h2>Newest Reported Issues</h2>
         {latestIssues.map((issue, i) => {
           return (
             <li key={i}>

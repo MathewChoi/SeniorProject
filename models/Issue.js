@@ -18,6 +18,19 @@ var IssueSchema = new Schema({
   room: {
     type: String,
   },
+  category: {
+    type: String,
+    enum : ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'],
+    default: 'PLUMBING'
+  },
+  status: {
+    type: String,
+    enum : ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'],
+    default: 'OPEN'
+  },
+  statusDescription: {
+    type: String,
+  },
   creator: {
     type: Schema.Types.ObjectId, ref: 'User'
   }

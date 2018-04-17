@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import '../styles/issues.css';
 class Issues extends Component {
 
   constructor(){
@@ -31,12 +31,25 @@ class Issues extends Component {
       <div>
         <h1>Issues</h1>
         {issueItems.map((issue, i) => {
+          var date = new Date (String(issue.createdAt).substring(0,19));
+          var time =String(issue.createdAt).substring(11,16);
+          var dateCreated = (date.getMonth()+1)+"-" + (date.getDate()) + "-" +date.getFullYear() + "   " + time ;
           return (
-            <li key={i}>
-              <Link to={`/issues/${issue._id}`}>
+            <div className="dark" key={i}>
+              <Link to={`/issues/${issue._id}`} className="title">
                 {issue.name}
               </Link>
-            </li>
+              <p className="spacing" >Description: {issue.description}</p>
+              <div className="location">
+                <p className="spacing">Building: {issue.building}</p>
+                <p className="spacing">Floor: {issue.floor}</p>
+                <p className="spacing">Room: {issue.room}</p>
+              </div>
+              <p className="spacing">Category: {issue.category}</p>
+              <p className="spacing">Status: {issue.status}</p>
+              <p className="spacing">Created At: {dateCreated}</p>
+        
+            </div>
           )
         })}
       </div>

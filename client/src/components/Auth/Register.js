@@ -26,9 +26,9 @@ class Register extends Component {
     axios.post('/api/users', { email, password })
       .then((res) => {
 
-        if (!res.data.success) {
-          this.setState({ message: res.data.message});
-        } else {
+        if (res.error) {
+          console.log(res.error);
+        }else{
           this.props.history.push("/login");
         }
         
