@@ -18,7 +18,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget imperd
 */
 export default class LandingPage extends Component {
 
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
+		const props = this.props;
 		return (
 			<div className="">
 				<div className="lp-page lp-container">
@@ -35,7 +40,7 @@ export default class LandingPage extends Component {
 						<hr className="lp-vl" />
 					</div>
 					<div className="lp-item lp-right-spacer" /*style={temp3}*/>
-						<CreateAccountForm />
+						<CreateAccountForm {...this.props} />
 					</div>
 				</div>
 			</div>

@@ -24,11 +24,11 @@ export default class CreateAccountForm extends Component {
 
 	/*static contextTypes = {
 		router: React.PropTypes.object
-	}*/
+	}
 
 	componentWillMount() {
 		this.context.router.getCurrentPath().should.equal('/');
-	}
+	}*/
 
 	onChange = (e) => {
 		const state = this.state
@@ -46,9 +46,9 @@ export default class CreateAccountForm extends Component {
 				if(res.error) {
 					console.log("Registration error: ", res.error);
 				} else {
-					//this.props.history.push("/login");
+					this.props.history.push("/login");
 					//<Redirect to='/login' />
-					this.context.router.push('/login');
+					// this.context.router.push('/login');
 				}
 			}
 		);
