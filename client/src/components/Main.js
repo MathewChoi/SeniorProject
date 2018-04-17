@@ -16,7 +16,7 @@ import Logout from './Auth/Logout';
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path="/" component={Dashboard}/>
+      <Route exact path="/" component={LandingPage}/>
       <Route exact path="/issues" component={Issues}/>
       <Route exact path="/issues/create" component={CreateIssue}/>
       <Route exact path="/issues/update/:id" component={UpdateIssue}/>

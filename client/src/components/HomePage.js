@@ -5,7 +5,7 @@ import team_logo from './../resources/inSpect-logo.svg';
 import './../stylesheets/HomePage.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import 'bulma/css/bulma.css';
+//import 'bulma/css/bulma.css';
 
 /*
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import home_icon from './../resources/home.svg';
 import '../stylesheets/Dashboard.css';
-import 'bulma/css/bulma.css';
+//import 'bulma/css/bulma.css';
 
 class Dashboard extends Component {
 

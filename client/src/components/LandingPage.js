@@ -17,7 +17,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget imperd
 <NavBar />
 */
 export default class LandingPage extends Component {
-  render() {
+
+	render() {
 		return (
 			<div className="">
 				<div className="lp-page lp-container">
@@ -34,7 +35,7 @@ export default class LandingPage extends Component {
 						<hr className="lp-vl" />
 					</div>
 					<div className="lp-item lp-right-spacer" /*style={temp3}*/>
-						<CreateAccountForm/>
+						<CreateAccountForm />
 					</div>
 				</div>
 			</div>
