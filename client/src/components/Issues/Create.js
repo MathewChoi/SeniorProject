@@ -11,7 +11,7 @@ class CreateIssue extends Component {
       building: '',
       floor: '',
       room: '',
-      category: 'PLUMMING',
+      category: 'PLUMBING',
     };
   }
 
@@ -38,7 +38,7 @@ class CreateIssue extends Component {
 
   render() {
     const { name, description, building, floor, room, category } = this.state;
-    const options = ['PLUMMING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
+    const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
