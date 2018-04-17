@@ -40,7 +40,6 @@ class Dashboard extends Component {
     
     const IssuesStats = this.state.IssuesStats;
     const latestIssues = this.state.latestIssues;
-    const user = this.state.user;
     const MONTH_NAMES = ["January ", "February ", "March ", "April ", "May ", "June ",
     "July ", "August ", "September ", "October ", "November ", "December "];
 
