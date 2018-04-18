@@ -25,6 +25,12 @@ class AdminDashboard extends Component {
       })
       .catch(err => console.log(err));
   } 
+  
+  onDelete(id){
+    if (window.confirm("Are you sure?")) {
+      alert("//TODO: Add delete user functionality");
+    } 
+  }
 
   render() {
     const users = this.state.users;
@@ -56,7 +62,7 @@ class AdminDashboard extends Component {
                   <td>{ fomatted_Created }</td>
                   <td>{ fomatted_Updated }</td>
                   <td>
-                    <Link to={`/admin/users/${user._id}`}>View</Link> | <Link to={`/admin/users/${user._id}`}>Edit</Link> | <Link to="/">Delete</Link>
+                    <Link to={`/admin/users/${user._id}`}>View</Link> | <Link to={`/admin/users/update/${user._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, user._id)} className="btn btn-outline-danger">Delete</button>
                   </td>
                 </tr>
               )

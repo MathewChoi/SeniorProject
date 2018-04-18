@@ -12,10 +12,10 @@ class AdminDashboard extends Component {
   }
 
   componentWillMount(){
-    this.getUsers();
+    this.getIssues();
   }
 
-  getUsers(){
+  getIssues(){
     axios.get('/api/issues')
       .then(res => {
         this.setState({issues: res.data}, () =>{
@@ -23,7 +23,16 @@ class AdminDashboard extends Component {
         })
       })
       .catch(err => console.log(err));
-  } 
+  }
+
+  onDelete(id){
+    if (window.confirm("Are you sure?")) {
+      axios.delete('/api/issues/'+id)
+      .then((result) => {
+        window.location.reload();
+      });
+    } 
+  }
 
   render() {
     const issues = this.state.issues;
@@ -54,7 +63,7 @@ class AdminDashboard extends Component {
                   <td>{issue.room}</td>
                   <td>{issue.category}</td>
                   <td>
-                    <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/${issue._id}`}>Edit</Link> | <Link to={`/issues/${issue._id}`}>Delete</Link>
+                    <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/update/${issue._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-outline-danger">Delete</button>
                   </td>
                 </tr>
               )

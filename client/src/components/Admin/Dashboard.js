@@ -69,11 +69,11 @@ class Dashboard extends Component {
         </div>
 
         <Link to="/admin/users">
-          Edit Users
+          View Users
         </Link>
         <br/ >
         <Link to="/admin/issues">
-          Edit Issues
+          View Issues
         </Link>
 
 
