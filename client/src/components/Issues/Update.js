@@ -89,7 +89,7 @@ class UpdateIssue extends Component {
             <label>Room</label>
             <input type="text" className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="room" />
           </div>
-          <div className="form-group">+
+          <div className="form-group">
             <label>Category</label>
             <select className="form-control" name="category" value={category} onChange={this.onChange}>
               {options.map((option, i) => {

@@ -31,7 +31,7 @@ class AdminDashboard extends Component {
     
     return (
       <div>
-
+        <h2>Users</h2>
         <table className="table">
           <thead>
             <tr>

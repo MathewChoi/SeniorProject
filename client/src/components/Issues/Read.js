@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import auth from '../Helpers/Authentication';
 
 class ReadIssue extends Component {
 
@@ -48,9 +49,9 @@ class ReadIssue extends Component {
           <p>Status: {issue.status}</p>
           <p>Status Description: {issue.statusDescription}</p>
           <p>Created At: {dateCreated}</p>
-          
-          <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link>
-          <button onClick={this.onDelete.bind(this, this.state.issue._id)} className="btn btn-outline-danger">Delete</button>
+
+          { (auth.getUser() === issue.creator || auth.isAdmin()) && <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link> } &nbsp;
+          { (auth.getUser() === issue.creator || auth.isAdmin()) && <button onClick={this.onDelete.bind(this, this.state.issue._id)} className="btn btn-outline-danger">Delete</button> }
       </div>
     );
   }

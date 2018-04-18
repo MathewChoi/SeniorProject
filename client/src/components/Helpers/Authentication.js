@@ -46,7 +46,7 @@ const Auth = {
         return null
       }
 
-      return user;
+      return user._id;
       
     }catch(e){
       return null;
