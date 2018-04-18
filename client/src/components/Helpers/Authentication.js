@@ -34,6 +34,23 @@ const Auth = {
     }catch(e){
       return false;
     }
+  },
+
+  getUser(){
+    try{
+      const user = jwtDecode(localStorage.getItem('token'));
+
+      // Check expiration date of jwt token
+      var current_time = new Date().getTime() / 1000;
+      if (current_time > user.exp) {
+        return null
+      }
+
+      return user;
+      
+    }catch(e){
+      return null;
+    }
   }
 
 };

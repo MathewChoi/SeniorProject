@@ -20,6 +20,11 @@ router.route('/stats')
 
 router.route('/latest-issues')
   .get(IssuesController.latestIssues);
+
+// Retrieve issue by month and year
+router.route('/date/:month/:year')
+  .get(IssuesController.issuesByMonth);
+
 /* GET SINGLE ISSUE BY ID */
 router.route('/:id')
   .get(IssuesController.read)

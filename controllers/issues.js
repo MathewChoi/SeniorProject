@@ -20,6 +20,38 @@ module.exports = {
                           assignedIssues:assignedCount, onHoldIssues:onHoldCount});
   },
 
+  issuesByMonth: async (req, res, next) => {
+    
+    //get month and year from url /api/issues/:month/:year
+    const { month, year } = req.params;
+    
+    // parse string to int
+    const yeari = parseInt(year);
+    const monthi = parseInt(month);
+
+    const start = new Date(yeari, monthi);
+    const end = new Date(yeari, monthi+1);
+    
+    const allissues = await Issue
+      .find({"updatedAt": {"$gte": start, "$lt": end}})
+      .sort( {"createdAt" : -1});
+
+    const open = allissues.filter(issue => issue.status === 'OPEN').length;
+    const inProgress = allissues.filter(issue => issue.status === 'IN PROGRESS').length;
+    const closed = allissues.filter(issue => issue.status === 'CLOSED').length;
+
+    const issues = allissues.splice(0,5);
+
+    data = {
+      issues,
+      open,
+      inProgress,
+      closed
+    }
+
+    res.status(200).json(data);
+  },
+
   latestIssues: async (req, res, next) => {
     const latestIssues = await Issue.find({}).sort( {"createdAt" : -1}).limit(10);
     res.status(200).json(latestIssues);

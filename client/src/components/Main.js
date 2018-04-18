@@ -13,6 +13,9 @@ import Logout from './Auth/Logout';
 import PrivateRoute from './Helpers/PrivateRoute';
 import AdminRoute from './Helpers/AdminRoute';
 import GenericNotFound from './Notfound';
+import AdminUsersPage from './Admin/Users';
+import AdminIssuesPage from './Admin/Issues';
+import EditUser from './Admin/EditUser';
 import AdminDashboard from './Admin/Dashboard';
 
 const Main = () => (
@@ -27,8 +30,11 @@ const Main = () => (
       <Route exact path="/logout" component={Logout}/>
       <Route exact path="/signup" component={Register}/>
       <Route exact path="/about" component={About}/>
-      <PrivateRoute path="/dashboard" component={Dashboard} />
-      <AdminRoute path="/admin/dashboard" component={AdminDashboard} />
+      <PrivateRoute path="/dashboard" component={Dashboard}/>
+      <AdminRoute path="/admin/users/:id" component={EditUser}/>
+      <AdminRoute path="/admin/users" component={AdminUsersPage}/>
+      <AdminRoute path="/admin/issues" component={AdminIssuesPage}/>
+      <AdminRoute path="/admin/dashboard" component={AdminDashboard}/>
       <Route component={GenericNotFound} />
     </Switch>
   </main>

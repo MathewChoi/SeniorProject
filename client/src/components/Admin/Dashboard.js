@@ -1,59 +1,98 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
-class AdminDashboard extends Component {
+class Dashboard extends Component {
 
-  constructor(){
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      users: []
-    }
+      issues: [],
+      data: {},
+    };
   }
 
   componentWillMount(){
-    this.getUsers();
+
+    var d = new Date();
+    var m = d.getMonth();
+    var y = d.getFullYear();
+
+    // Get issues for this month
+    axios.get(`/api/issues/date/${m}/${y}`)
+    .then((res)=>{
+      this.setState({data: res.data});
+      this.setState({issues: res.data.issues});
+    }).catch(err =>{
+      console.log(err);
+    });
+
   }
-
-  getUsers(){
-    axios.get('/api/users')
-      .then(res => {
-        this.setState({users: res.data}, () =>{
-          // console.log(this.state)
-        })
-      })
-      .catch(err => console.log(err));
-  } 
-
-  render() {
-    const users = this.state.users;
     
+  render() {
+    
+    const { data, issues } = this.state;
+    
+    const { open, closed, inProgress } = data;
+
+    // using momentjs for date formatting
+    const date = moment().format('MMMM YYYY');
+
     return (
       <div>
+        <h1>Issues for {date}</h1>
+        <div className="container mt-5 mb-5">
+          <div className="row">
+            <div className="col-sm">
+              <h6>Open Issues</h6>
+              <p>{open} Issues</p>
+            </div>
+            <div className="col-sm">
+              <h6>Open Issues</h6>
+              <p>{inProgress} Issues</p>
+            </div>
+            <div className="col-sm">
+              <h6>Open Issues</h6>
+              <p>{closed} Issues</p>
+            </div>
+          </div>
+        </div>
 
+        <Link to="/admin/users">
+          Edit Users
+        </Link>
+        <br/ >
+        <Link to="/admin/issues">
+          Edit Issues
+        </Link>
+
+
+        <h2>Latest Posted Issues</h2>
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Email</th>
-              <th scope="col"># Issues</th>
-              <th scope="col">Role</th>
-              <th scope="col">Created At</th>
-              <th scope="col">Updated At</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Building</th>
+              <th scope="col">Floor</th>
+              <th scope="col">Room</th>
+              <th scope="col">Category</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, i) => {
-              var fomatted_Created = moment(user.createdAt).format('MM-DD-YYYY hh:mm');
-              var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
+          {issues.map((issue, i) => {
               return (
                 <tr key={i}>
-                  <th scope="row">{user._id}</th>
-                  <td>{user.email}</td>
-                  <td>{user.issues.length}</td>
-                  <td>{user.role}</td>
-                  <td>{ fomatted_Created }</td>
-                  <td>{ fomatted_Updated }</td>
+                  <td>{issue.name}</td>
+                  <td>{issue.description}</td>
+                  <td>{issue.building}</td>
+                  <td>{issue.floor}</td>
+                  <td>{issue.room}</td>
+                  <td>{issue.category}</td>
+                  <td>
+                    <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/${issue._id}`}>Edit</Link> | <Link to={`/issues/${issue._id}`}>Delete</Link>
+                  </td>
                 </tr>
               )
             })}
@@ -62,6 +101,7 @@ class AdminDashboard extends Component {
       </div>
     );
   }
+  
 }
 
-export default AdminDashboard;
+export default Dashboard;
