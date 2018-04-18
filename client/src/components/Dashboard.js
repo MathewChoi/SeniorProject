@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SideNav from './SideNav';
 import axios from 'axios';
 import home_icon from './../resources/home.svg';
 import '../stylesheets/Dashboard.css';
@@ -38,7 +39,22 @@ class Dashboard extends Component {
     });
   }
 
-    render() {
+  render() {
+    return(
+      <div>
+        <SideNav {...this.props} />
+        <div className="db-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit arcu ac consectetur sagittis. Nulla in pulvinar erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin id eleifend massa, sed dictum est. Curabitur sed rhoncus lectus. Donec at imperdiet leo. Mauris arcu turpis, placerat congue diam a, sagittis mattis lorem. Ut vehicula ornare finibus. Mauris pulvinar bibendum odio lobortis semper. Vivamus libero velit, hendrerit eget semper quis, eleifend sit amet erat. Curabitur eleifend, nisl maximus porttitor imperdiet, arcu lectus pulvinar dolor, sed pulvinar eros diam sed sapien.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit arcu ac consectetur sagittis. Nulla in pulvinar erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin id eleifend massa, sed dictum est. Curabitur sed rhoncus lectus. Donec at imperdiet leo. Mauris arcu turpis, placerat congue diam a, sagittis mattis lorem. Ut vehicula ornare finibus. Mauris pulvinar bibendum odio lobortis semper. Vivamus libero velit, hendrerit eget semper quis, eleifend sit amet erat. Curabitur eleifend, nisl maximus porttitor imperdiet, arcu lectus pulvinar dolor, sed pulvinar eros diam sed sapien.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit arcu ac consectetur sagittis. Nulla in pulvinar erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin id eleifend massa, sed dictum est. Curabitur sed rhoncus lectus. Donec at imperdiet leo. Mauris arcu turpis, placerat congue diam a, sagittis mattis lorem. Ut vehicula ornare finibus. Mauris pulvinar bibendum odio lobortis semper. Vivamus libero velit, hendrerit eget semper quis, eleifend sit amet erat. Curabitur eleifend, nisl maximus porttitor imperdiet, arcu lectus pulvinar dolor, sed pulvinar eros diam sed sapien.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit arcu ac consectetur sagittis. Nulla in pulvinar erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin id eleifend massa, sed dictum est. Curabitur sed rhoncus lectus. Donec at imperdiet leo. Mauris arcu turpis, placerat congue diam a, sagittis mattis lorem. Ut vehicula ornare finibus. Mauris pulvinar bibendum odio lobortis semper. Vivamus libero velit, hendrerit eget semper quis, eleifend sit amet erat. Curabitur eleifend, nisl maximus porttitor imperdiet, arcu lectus pulvinar dolor, sed pulvinar eros diam sed sapien.</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit arcu ac consectetur sagittis. Nulla in pulvinar erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin id eleifend massa, sed dictum est. Curabitur sed rhoncus lectus. Donec at imperdiet leo. Mauris arcu turpis, placerat congue diam a, sagittis mattis lorem. Ut vehicula ornare finibus. Mauris pulvinar bibendum odio lobortis semper. Vivamus libero velit, hendrerit eget semper quis, eleifend sit amet erat. Curabitur eleifend, nisl maximus porttitor imperdiet, arcu lectus pulvinar dolor, sed pulvinar eros diam sed sapien.</p>
+        </div>
+      </div>
+    );
+  }
+
+/*    render() {
 		return(
 			<div className="db-sidenav">
 				<p className="db-title">
@@ -56,7 +72,7 @@ class Dashboard extends Component {
 				</div>
 			</div>
 		);
-	}
+	}*/
   /*render() {
     
   render() {

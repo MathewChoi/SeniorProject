@@ -14,6 +14,7 @@ import Dashboard from './Dashboard';
 import Logout from './Auth/Logout';
 import PrivateRoute from './Helpers/PrivateRoute';
 import GenericNotFound from './Notfound';
+import SideNav from './SideNav';
 
 const Main = () => (
   <main>
@@ -28,6 +29,7 @@ const Main = () => (
       <Route exact path="/signup" component={Register}/>
       <Route exact path="/about" component={About}/>
       <PrivateRoute path="/dashboard" component={Dashboard} />
+      <PrivateRoute path="/sidenav" component={SideNav} />
       <Route component={GenericNotFound} />
     </Switch>
   </main>

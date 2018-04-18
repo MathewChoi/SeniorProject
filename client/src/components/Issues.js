@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/issues.css';
+import '../stylesheets/Issues.css';
 class Issues extends Component {
 
   constructor(){
