@@ -17,7 +17,9 @@ class AdminDashboard extends Component {
   }
 
   getUsers(){
-    axios.get('/api/users')
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
+
+    axios.get('/api/users', header)
       .then(res => {
         this.setState({users: res.data}, () =>{
           // console.log(this.state)
@@ -41,7 +43,6 @@ class AdminDashboard extends Component {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">ID</th>
               <th scope="col">Email</th>
               <th scope="col"># Issues</th>
               <th scope="col">Role</th>
@@ -55,7 +56,6 @@ class AdminDashboard extends Component {
               var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
               return (
                 <tr key={i}>
-                  <td>{user._id}</td>
                   <td>{user.email}</td>
                   <td>{user.issues.length}</td>
                   <td>{user.role}</td>

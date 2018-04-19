@@ -16,7 +16,8 @@ class ReadUser extends Component {
   }
 
   getUsers(){
-    axios.get('/api/users/'+this.props.match.params.id)
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
+    axios.get('/api/users/'+this.props.match.params.id,header)
       .then(res => {
         this.setState({user: res.data});
         this.setState({issues: res.data.issues});
