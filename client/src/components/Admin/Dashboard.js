@@ -58,11 +58,11 @@ class Dashboard extends Component {
               <p>{open} Issues</p>
             </div>
             <div className="col-sm">
-              <h6>Open Issues</h6>
+              <h6>In Progress Issues</h6>
               <p>{inProgress} Issues</p>
             </div>
             <div className="col-sm">
-              <h6>Open Issues</h6>
+              <h6>Closed Issues</h6>
               <p>{closed} Issues</p>
             </div>
           </div>

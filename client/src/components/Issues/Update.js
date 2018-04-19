@@ -13,6 +13,7 @@ class UpdateIssue extends Component {
       floor: '',
       room: '',
       category: '',
+      status: '',
     };
   }
   
@@ -22,7 +23,7 @@ class UpdateIssue extends Component {
     const id = this.props.match.params.id;
     axios.get('/api/issues/'+id, header)
       .then(res => {
-        this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category}, () => {
+        this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category, status: res.data.status}, () => {
           console.log(this.state);
         })
       })
@@ -44,9 +45,10 @@ class UpdateIssue extends Component {
     let floor = this.state.floor;
     let room = this.state.room;
     let category = this.state.category;
+    let status = this.state.status;
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
     const id = this.props.match.params.id;
-    const data = { name, description, building, floor, room , category};
+    const data = { name, description, building, floor, room , category, status};
 
     axios.put('/api/issues/'+id, data, header)
     .then((res) => {
@@ -63,7 +65,9 @@ class UpdateIssue extends Component {
     let floor = this.state.floor;
     let room = this.state.room;
     let category = this.state.category;
+    let status = this.state.status;
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
+    const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -93,6 +97,16 @@ class UpdateIssue extends Component {
             <label>Category</label>
             <select className="form-control" name="category" value={category} onChange={this.onChange}>
               {options.map((option, i) => {
+                return (
+                  <option value={option} key={i}>{option}</option>
+                )
+              })}
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Category</label>
+            <select className="form-control" name="status" value={status} onChange={this.onChange}>
+              {statusOptions.map((option, i) => {
                 return (
                   <option value={option} key={i}>{option}</option>
                 )
