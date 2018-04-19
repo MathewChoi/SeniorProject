@@ -97,6 +97,9 @@ module.exports = {
     // Search for issue using id from params
     const issue = await Issue.findById(id);
     // return the issue
+    if(issue === null){
+      res.status(404);
+    }
     res.status(200).json(issue);
   },
 
