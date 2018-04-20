@@ -32,10 +32,12 @@ module.exports = {
   },
 
   facilityIssues:async (req, res, next) => {
-    const facility= req.params.facility;
-    const sort = req.query.sort;
-    const order = req.query.order;
-    const facilityIssues = await Issue.find({"building": facility, sort:sort}).sort( {sort : order});
+    const {facility} = req.params;
+    const sort = req.query.sort.toString();
+    //req.query.order = parseInt(req.query.order);
+    const order = parseInt(req.query.order,2);
+
+    const facilityIssues = await Issue.find({"building": facility}).sort( {"${sort}" : order});
     res.status(200).json(facilityIssues);
   },
 

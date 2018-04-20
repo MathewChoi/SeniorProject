@@ -6,6 +6,8 @@ import About from './About';
 import ReadIssue from './Issues/Read';
 import CreateIssue from './Issues/Create';
 import UpdateIssue from './Issues/Update';
+import FacilitiesIssues from './Issues/FacilityIssues'; 
+import ListFacilities from './ListFacilities';
 import Login from './Auth/Login';
 import Register from './Auth/Register';
 import Dashboard from './Dashboard';
@@ -21,6 +23,8 @@ const Main = () => (
       <PrivateRoute exact path="/issues/create" component={CreateIssue}/>
       <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>
       <Route exact path="/issues/:id" component={ReadIssue}/>
+      <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/>
+      <Route exact path="/issues/facilities" component={ListFacilities}/>
       <Route exact path="/login" component={Login}/>
       <Route exact path="/logout" component={Logout}/>
       <Route exact path="/signup" component={Register}/>
