@@ -10,6 +10,7 @@ class FacilityIssues extends Component {
       issues: [],
       query:''
     }
+    this.onChange = this.onChange.bind(this);
   }
 
   componentWillMount(){
@@ -27,8 +28,16 @@ class FacilityIssues extends Component {
       .catch(err => console.log(err));
   } 
 
-  onChange = (e) => {
-    
+  onChange (e){
+      console.log(e.target.value);
+    this.setState({query: e.target.value});
+    axios.get('/api/issues/facility-issues/'+this.props.match.params.facility+e.target.value)//+ this.props.match.params.facility)
+      .then(res => {
+        this.setState({issues: res.data}, () =>{
+          // console.log(this.state)
+        })
+      })
+      .catch(err => console.log(err));
   }
   
   render() {
@@ -38,13 +47,13 @@ class FacilityIssues extends Component {
       <div>
         <h1>{url[3]}</h1>
 
-        <select className="form-control" value={query} onChange={this.onChange}>
+        <select className="form-control" value={this.state.query} onChange={this.onChange}>
               <option value='?sort=createdAt&order=-1'>Sort by recently reported</option>
               <option value='?sort=createdAt&order=1'>Sort by earliest reported</option>
               <option value='?sort=name&order=1'>Sort by issues in alphabetical order (A-Z)</option>
               <option value='?sort=name&order=-1'>Sort by issues in alphabetical order (Z-A)</option>
-              <option value='?sort=floor&order=-1'>Sort by floor (LOW to HIGH)</option>
-              <option value='?sort=floor&order=1'>Sort by floor(HIGH to LOW)</option>
+              <option value='?sort=floor&order=1'>Sort by floor (LOW to HIGH)</option>
+              <option value='?sort=floor&order=-1'>Sort by floor(HIGH to LOW)</option>
             </select>
 
 

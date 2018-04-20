@@ -33,11 +33,23 @@ module.exports = {
 
   facilityIssues:async (req, res, next) => {
     const {facility} = req.params;
-    const sort = req.query.sort.toString();
+    const sortBy = req.query.sort.toString();
     //req.query.order = parseInt(req.query.order);
     const order = parseInt(req.query.order,2);
-
-    const facilityIssues = await Issue.find({"building": facility}).sort( {"${sort}" : order});
+    //console.log(sortBy == 'createdAt'.toString());
+    var facilityIssues;
+    if(sortBy == 'createdAt'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"createdAt" : order});
+    }
+    if(sortBy == 'name'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"name" : order, "createdAt":-1});
+    }
+    if(sortBy == 'floor'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"floor" : order, "room":1, "createdAt":-1});
+    }
     res.status(200).json(facilityIssues);
   },
 
