@@ -20,6 +20,7 @@ router.route('/stats')
 
 router.route('/latest-issues')
   .get(IssuesController.latestIssues);
+
 /* GET SINGLE ISSUE BY ID */
 router.route('/:id')
   .get(IssuesController.read)
