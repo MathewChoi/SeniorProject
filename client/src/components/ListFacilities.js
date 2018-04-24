@@ -29,7 +29,8 @@ class ListFacilites extends Component {
     const facilityItems = this.state.facilities;
     return (
       <div>
-        <h1>Facilities</h1>
+        <h1>View Issues by Facility</h1>
+        
         {facilityItems.map((facility, i) => {
           return (
             <li key={i}>

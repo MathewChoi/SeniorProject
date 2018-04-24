@@ -24,7 +24,7 @@ const Main = () => (
       <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>
       <Route exact path="/issues/:id" component={ReadIssue}/>
       <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/>
-      <Route exact path="/issues/facilities" component={ListFacilities}/>
+      <Route exact path="/facilities" component={ListFacilities}/>
       <Route exact path="/login" component={Login}/>
       <Route exact path="/logout" component={Logout}/>
       <Route exact path="/signup" component={Register}/>
