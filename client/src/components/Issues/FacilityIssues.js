@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/issues.css';
+var moment = require('moment');
+
 class FacilityIssues extends Component {
 
   constructor(){
@@ -60,9 +62,8 @@ class FacilityIssues extends Component {
 
 
         {issueItems.map((issue, i) => {
-          var date = new Date (String(issue.createdAt).substring(0,19));
-          var time =String(issue.createdAt).substring(11,16);
-          var dateCreated = (date.getMonth()+1)+"-" + (date.getDate()) + "-" +date.getFullYear() + "   " + time ;
+          var createdAt = moment(issue.createdAt).format('MM-DD-YYYY h:mm:ss a');
+          
           return (
             <div className="dark" key={i}>
               <Link to={`/issues/${issue._id}`} className="title">
@@ -76,7 +77,7 @@ class FacilityIssues extends Component {
               </div>
               <p className="spacing">Category: {issue.category}</p>
               <p className="spacing">Status: {issue.status}</p>
-              <p className="spacing">Created At: {dateCreated}</p>
+              <p className="spacing">Created At: {createdAt}</p>
         
             </div>
           )
