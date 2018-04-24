@@ -14,12 +14,13 @@ import PrivateRoute from './Helpers/PrivateRoute';
 import AdminRoute from './Helpers/AdminRoute';
 import GenericNotFound from './Notfound';
 
-import AdminUsersPage from './Admin/Users';
-import AdminIssuesPage from './Admin/Issues';
+import AdminUsersPage from './Admin/AdminUsersPage';
+import AdminIssuesPage from './Admin/AdminIssuesPage';
+import AdminDashboard from './Admin/AdminDashboard';
 
 import ReadUser from './Users/Read';
 import UpdateUser from './Users/Update';
-import AdminDashboard from './Admin/Dashboard';
+
 
 const Main = () => (
   <main>

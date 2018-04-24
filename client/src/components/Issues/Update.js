@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Auth from '../Helpers/Authentication';
 
 class UpdateIssue extends Component {
   constructor(props) {
@@ -68,6 +69,8 @@ class UpdateIssue extends Component {
     let status = this.state.status;
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
+    const isAdmin = Auth.isAdmin();
+
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -103,17 +106,18 @@ class UpdateIssue extends Component {
               })}
             </select>
           </div>
-          <div className="form-group">
-            <label>Category</label>
-            <select className="form-control" name="status" value={status} onChange={this.onChange}>
-              {statusOptions.map((option, i) => {
-                return (
-                  <option value={option} key={i}>{option}</option>
-                )
-              })}
-            </select>
-          </div>
-          
+          { isAdmin && 
+            <div className="form-group">
+              <label>Status</label>
+              <select className="form-control" name="status" value={status} onChange={this.onChange}>
+                {statusOptions.map((option, i) => {
+                  return (
+                    <option value={option} key={i}>{option}</option>
+                  )
+                })}
+              </select>
+            </div>
+          }
           
           <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 

@@ -105,17 +105,44 @@ module.exports = {
 
   // update an issue using id from url params
   update: async (req, res, next) => {
+    const user  = req.user; // user from passport authentication
     const { id } = req.params;
-    const newIssue = req.body;
-    const result = await Issue.findByIdAndUpdate(id,newIssue);
-    res.status(200).json({success: true});
+
+    const issueToUpdate = await Issue.findById(id);
+    
+    // Use .equals for object comparison
+    if(issueToUpdate.creator.equals(user._id) || user.role === "ADMIN"){
+
+      const newIssue = req.body;
+      const status = req.body.status;
+      newIssue.status = issueToUpdate.status;
+      
+      if( user.role === "ADMIN" ){
+        newIssue.status = status;
+      }
+
+      const result = await Issue.findByIdAndUpdate(id,newIssue);
+      res.status(200).json({success: true});
+    }else{
+      res.status(401).json({success: false});
+    }
+    
   },
 
   // delete an issue using id from url params
   delete: async (req, res, next) => {
+    const user  = req.user; // user from passport authentication
     const { id } = req.params;
-    const result = await Issue.findByIdAndRemove(id);
-    res.status(200).json({success: true});
+    
+    const issueToDelete = await Issue.findById(id);
+    if(issueToDelete.creator.equals(user._id) || user.role === "ADMIN"){
+      const result = await Issue.findByIdAndRemove(id);
+      res.status(200).json({success: true});
+    }else{
+      res.status(401).json({success: false});
+    }
+    
+    
   }
 
 }

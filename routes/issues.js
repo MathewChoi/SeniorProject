@@ -28,7 +28,14 @@ router.route('/date/:month/:year')
 /* GET SINGLE ISSUE BY ID */
 router.route('/:id')
   .get(IssuesController.read)
-  .put(IssuesController.update)
-  .delete(IssuesController.delete);
+  .patch(
+    passport.authenticate('jwt', { session: false }),
+    IssuesController.update)
+  .put(
+    passport.authenticate('jwt', { session: false }),
+    IssuesController.update)
+  .delete(
+    passport.authenticate('jwt', { session: false }),
+    IssuesController.delete);
 
 module.exports = router;
