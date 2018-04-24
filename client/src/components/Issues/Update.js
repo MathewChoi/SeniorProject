@@ -30,9 +30,22 @@ class UpdateIssue extends Component {
   }
 
   onChange = (event) => {
-    const state = this.state
-    state[event.target.name] = event.target.value;
+    const name = event.target.name;
+    const value = event.target.value;
+    const state = this.state;
+    // apply title capitalization
+    if (['name', 'room', 'building'].indexOf(name) !== -1) {
+      state[name] = this.toTitleCase(event.target.value);
+    } else {
+      state[name] = event.target.value;
+    }
+
     this.setState(state);
+  }
+  
+  toTitleCase = (str) => {
+    // replaces each word (alphanumeric followed by a spaces) with it title capitalization
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
   }
   
   
