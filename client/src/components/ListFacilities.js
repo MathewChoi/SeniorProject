@@ -45,4 +45,4 @@ class ListFacilites extends Component {
   }
 }
 
-export default Issues;
+export default ListFacilites;
