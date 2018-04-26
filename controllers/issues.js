@@ -32,6 +32,28 @@ module.exports = {
     res.status(200).json(issues);
   },
 
+  facilityIssues:async (req, res, next) => {
+    const {facility} = req.params;
+    const sortBy = req.query.sort.toString();
+    //req.query.order = parseInt(req.query.order);
+    const order = parseInt(req.query.order,2);
+    //console.log(sortBy == 'createdAt'.toString());
+    var facilityIssues;
+    if(sortBy == 'createdAt'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"createdAt" : order});
+    }
+    if(sortBy == 'name'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"name" : order, "createdAt":-1});
+    }
+    if(sortBy == 'floor'.toString())
+    {
+      facilityIssues = await Issue.find({"building": facility}).sort( {"floor" : order, "room":1, "createdAt":-1});
+    }
+    res.status(200).json(facilityIssues);
+  },
+
   // Create new issue using userid passed from the decoded jwt
   create: async (req, res, next) => {
     // Get Id from url

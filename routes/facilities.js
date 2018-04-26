@@ -16,6 +16,7 @@ router.route('/')
 
 router.route('/:id')
     .get(FacilitiesController.read)
+<<<<<<< HEAD
     .post(FacilitiesController.addFloor)
     .put(FacilitiesController.updateFloor)
     .delete(FacilitiesController.deleteFacility);
@@ -24,5 +25,9 @@ router.route('/:id/:floorNumber')
     .put(FacilitiesController.updateFloor)
     .delete(FacilitiesController.deleteFloor)
 
+=======
+    .put(FacilitiesController.addFloor);
+//     .delete(FacilitiesController.delete);
+>>>>>>> SortingIssues
 
 module.exports = router;
