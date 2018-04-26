@@ -6,7 +6,8 @@ const IssuesController = require('../controllers/issues');
 
 router.route('/')
   // List all the users
-  .get(UsersController.index)
+  .get(passport.authenticate('jwt', { session: false }),
+    UsersController.index)
   // Register a new user
   .post(UsersController.register);
 
@@ -24,11 +25,14 @@ router.route('/dashboard')
 
 router.route('/:userId')
   // Get user details
-  .get(UsersController.getUser)
+  .get(passport.authenticate('jwt', { session: false }),
+    UsersController.getUser)
   // Update user information by replacing
-  .put(UsersController.replaceUser)
+  .put(passport.authenticate('jwt', { session: false }),
+    UsersController.replaceUser)
   // Update user information by patching
-  .patch(UsersController.updateUser);
+  .patch(passport.authenticate('jwt', { session: false }),
+    UsersController.updateUser);
 
 
 module.exports = router;

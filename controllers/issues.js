@@ -20,6 +20,38 @@ module.exports = {
                           assignedIssues:assignedCount, onHoldIssues:onHoldCount});
   },
 
+  issuesByMonth: async (req, res, next) => {
+    
+    //get month and year from url /api/issues/:month/:year
+    const { month, year } = req.params;
+    
+    // parse string to int
+    const yeari = parseInt(year);
+    const monthi = parseInt(month);
+
+    const start = new Date(yeari, monthi);
+    const end = new Date(yeari, monthi+1);
+    
+    const allissues = await Issue
+      .find({"updatedAt": {"$gte": start, "$lt": end}})
+      .sort( {"createdAt" : -1});
+
+    const open = allissues.filter(issue => issue.status === 'OPEN').length;
+    const inProgress = allissues.filter(issue => issue.status === 'IN PROGRESS').length;
+    const closed = allissues.filter(issue => issue.status === 'CLOSED').length;
+
+    const issues = allissues.splice(0,5);
+
+    data = {
+      issues,
+      open,
+      inProgress,
+      closed
+    }
+
+    res.status(200).json(data);
+  },
+
   latestIssues: async (req, res, next) => {
     const latestIssues = await Issue.find({}).sort( {"createdAt" : -1}).limit(10);
     res.status(200).json(latestIssues);
@@ -88,22 +120,52 @@ module.exports = {
     // Search for issue using id from params
     const issue = await Issue.findById(id);
     // return the issue
+    if(issue === null){
+      res.status(404);
+    }
     res.status(200).json(issue);
   },
 
   // update an issue using id from url params
   update: async (req, res, next) => {
+    const user  = req.user; // user from passport authentication
     const { id } = req.params;
-    const newIssue = req.body;
-    const result = await Issue.findByIdAndUpdate(id,newIssue);
-    res.status(200).json({success: true});
+
+    const issueToUpdate = await Issue.findById(id);
+    
+    // Use .equals for object comparison
+    if(issueToUpdate.creator.equals(user._id) || user.role === "ADMIN"){
+
+      const newIssue = req.body;
+      const status = req.body.status;
+      newIssue.status = issueToUpdate.status;
+      
+      if( user.role === "ADMIN" ){
+        newIssue.status = status;
+      }
+
+      const result = await Issue.findByIdAndUpdate(id,newIssue);
+      res.status(200).json({success: true});
+    }else{
+      res.status(401).json({success: false});
+    }
+    
   },
 
   // delete an issue using id from url params
   delete: async (req, res, next) => {
+    const user  = req.user; // user from passport authentication
     const { id } = req.params;
-    const result = await Issue.findByIdAndRemove(id);
-    res.status(200).json({success: true});
+    
+    const issueToDelete = await Issue.findById(id);
+    if(issueToDelete.creator.equals(user._id) || user.role === "ADMIN"){
+      const result = await Issue.findByIdAndRemove(id);
+      res.status(200).json({success: true});
+    }else{
+      res.status(401).json({success: false});
+    }
+    
+    
   }
 
 }
