@@ -16,7 +16,13 @@ router.route('/')
 
 router.route('/:id')
     .get(FacilitiesController.read)
-    .put(FacilitiesController.addFloor)
-//     .delete(FacilitiesController.delete);
+    .post(FacilitiesController.addFloor)
+    .put(FacilitiesController.updateFloor)
+    .delete(FacilitiesController.deleteFacility);
+
+router.route('/:id/:floorNumber')
+    .put(FacilitiesController.updateFloor)
+    .delete(FacilitiesController.deleteFloor)
+
 
 module.exports = router;

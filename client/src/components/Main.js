@@ -3,6 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 import Issues from './Issues';
 import Home from './Home';
 import About from './About';
+// import ReadFacility from './Facilities/Read';
+import CreateFacility from './Facilities/Create';
+// import UpdateFacility from './Facilities/Update';
 import ReadIssue from './Issues/Read';
 import CreateIssue from './Issues/Create';
 import UpdateIssue from './Issues/Update';
@@ -17,6 +20,9 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={Home}/>
+      <PrivateRoute path="/facilities/create" component={CreateFacility} />
+      {/* <PrivateRoute path="/facilities" component={ReadFacility} /> */}
+      
       <Route exact path="/issues" component={Issues}/>
       <PrivateRoute exact path="/issues/create" component={CreateIssue}/>
       <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>

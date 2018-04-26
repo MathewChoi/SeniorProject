@@ -30,6 +30,10 @@ class Navbar extends Component {
           <Link className="p-2 text-dark" to="/issues/create">Report Issue</Link>
           <Link className="p-2 text-dark" to="/about">About</Link>
           <Link className="p-2 text-dark" to="/dashboard">Dashboard</Link>
+          
+          {/* <Link className="p-2 text-dark" to="/facilities">View Facilities</Link>           */}
+          <Link className="p-2 text-dark" to="/facilities/create">Add a Facility</Link>
+        
         </nav>
         <Link className="btn btn-outline-primary" to="/logout">Sign out</Link>
       </div>
