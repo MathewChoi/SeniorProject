@@ -15,9 +15,19 @@ class CreateIssue extends Component {
     };
   }
 
-  onChange = (e) => {
-    const state = this.state
-    state[e.target.name] = e.target.value;
+  toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+  onChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    const state = this.state;
+    if (name === 'name' || name === 'room') {
+      state[name] = this.toTitleCase(value);
+    } else {
+      state[name] = value;
+    }
     this.setState(state);
   }
   
@@ -43,7 +53,7 @@ class CreateIssue extends Component {
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
 
-          <h2 className="form-signin-heading">Create Issue</h2>
+          <h2 className="form-signin-heading">Report Issue</h2>
           <div className="form-group">
             <label>Name</label>
             <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} required placeholder="name" />

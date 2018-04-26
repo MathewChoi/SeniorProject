@@ -21,7 +21,7 @@ var UserSchema = new Schema({
     default: 'GUEST',
     required: true
   },
-  issues: [{ type: Schema.Types.ObjectId, ref: 'Issue' }]
+  // issues: [{ type: Schema.Types.ObjectId, ref: 'Issue' }]
 },
 { timestamps: true });
 

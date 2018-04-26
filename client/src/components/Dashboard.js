@@ -70,7 +70,7 @@ class Dashboard extends Component {
           </div>
         </div>
 
-        <h2>Latest Posted Issues</h2>
+        <h2>Newest Reported Issues</h2>
         {latestIssues.map((issue, i) => {
           return (
             <li key={i}>

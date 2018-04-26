@@ -27,8 +27,9 @@ module.exports = {
   // View all issues created by user
   userIssues: async (req, res, next) => {
     const { userId } = req.params;
-    const user = await User.findById(userId).populate('issues');
-    res.status(200).json(user.issues);
+    // const user = await User.findById(userId).populate('issues');
+    const issues = await Issue.find({"creator" : userId})
+    res.status(200).json(issues);
   },
 
   // Create new issue using userid passed from the decoded jwt
@@ -51,13 +52,13 @@ module.exports = {
     // Save the issue
     await newIssue.save();
     // Add the new issue to the users issue array
-    user.issues.push(newIssue);
+    // user.issues.push(newIssue); deprecated
     // Save the updated user
-    await user.save();
+    // await user.save();
     // Send status code 201 - Created and new Issue as json
     res.status(201).json(newIssue);
   },
-
+  
   // view a single issue
   read: async (req, res, next) => {
     // get id params

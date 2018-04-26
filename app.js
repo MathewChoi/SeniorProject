@@ -12,6 +12,7 @@ const config = require('./config');
 const index = require('./routes/index');
 const issues = require('./routes/issues');
 const users = require('./routes/users');
+const facilities = require('./routes/facilities');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/api/users', users);
 app.use('/api/issues', issues);
+app.use('/api/facilities', facilities);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

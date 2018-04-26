@@ -51,7 +51,6 @@ module.exports = {
       email: req.body.email
     }, function(err, user) {
       if (err) throw err;
-  
       if (!user) {
         res.send({
           success: false,
