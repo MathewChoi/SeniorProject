@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import auth from '../Helpers/Authentication';
 import NotFound from '../Notfound';
 

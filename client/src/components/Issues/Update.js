@@ -33,7 +33,6 @@ class UpdateIssue extends Component {
 
   onChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
     const state = this.state;
     // apply title capitalization
     if (['name', 'room', 'building'].indexOf(name) !== -1) {
