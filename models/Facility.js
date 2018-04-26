@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-// const bcrypt = require('bcrypt');
-// const saltRounds = 10;
 const Schema = mongoose.Schema;
 
+// RoomSchema defines how the rooms are stored in the FloorSchema
 let RoomSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        sparse: true        
     },
     isOpen: {
         type: Boolean,
@@ -14,13 +14,15 @@ let RoomSchema = new Schema({
     }
 });
 
+// FloorSchema defines how the floor is stored in the FacilitySchema
+// TODO find out why floors with identical floor numbers can be added to the floor lists
 let FloorSchema = new Schema({
     floorNumber: {
-        type: Number,
-        unique: true,
-        required: true
+        type: String,
+        required: true,
+        sparse: true
     },
-    rooms: [RoomSchema]
+    rooms: []
 });
 
 // FacilitySchema defines how the Facility is stored in the database
@@ -28,14 +30,14 @@ let FacilitySchema = new Schema({
     name: {
         type: String,
         unique: true,
+        sparse: true,
         required: true
     },
     isOpen: {
         type: Boolean,
         default: true
     },
-    floors: [FloorSchema],
-    
+    floors: []
     // issues:[{type: Schema.Types.ObjectId, ref: 'Issue'}]
 });
 

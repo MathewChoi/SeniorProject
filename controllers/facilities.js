@@ -1,3 +1,5 @@
+// import { STATES } from 'mongoose';
+
 const User = require('../models/User');
 const Issue = require('../models/Issue');
 const Models = require('../models/Facility');
@@ -15,7 +17,7 @@ module.exports = {
     create: async (req, res, next) => {
         const newFacility = new Models.Facility({
             "name": req.body.name,
-            "isOpen": req.body.isOpen,
+            "isOpen": req.body.isOpen==='true',
             "floors":[],
         });
         await newFacility.save();
@@ -33,7 +35,8 @@ module.exports = {
     addFloor: async (req, res, next) => {
         let STATUS = 200;
         let SUCCEEDED = true;
-        // get the facility from the url
+
+        // get the facility id from the url
         const { id } = req.params;
 
         let newFacility = await Models.Facility.findById(id, function(err, facility){
@@ -48,56 +51,120 @@ module.exports = {
         const floorNumber = req.body.floorNumber;
         const roomsStr = req.body.rooms;
 
-        await Models.Facility.findOne({"floorNumber":floorNumber}, function(err, facility){
-            if (err) {
-                console.log(err);
-                STATUS = 400;
-                SUCCEEDED = false;
-            }  
+        //  check to see if the floor already exists
+        const matchingFloor = await Models.Facility.findOne(
+            {"_id":id, "floors":{ $elemMatch: {"floorNumber": floorNumber}}},
+            function(err, facility){
+                if (err) {
+                    console.log(err);
+                    STATUS = 400;
+                    SUCCEEDED = false;
+                }  
         });
+        console.log(matchingFloor);
+        if (matchingFloor !== null) {
+            STATUS = 400;
+            SUCCEEDED = false;
+        }
 
-        if (SUCCEEDED){
+        if (matchingFloor === null){
             // add the rooms to the list of rooms for the floor
             let roomlist = roomsStr.split(', ');
-            let roomSchemas = [];   
+            let roomSchemas = [];
+            let roomSet = new Set(); 
             roomlist.forEach(function(room){
-                const newRoom = new Models.Room({
-                    "name":room.trim(),
-                });
-                roomSchemas.push(newRoom);
+                room = room.trim();
+                if (!roomSet.has(room)) {
+                    const newRoom = {
+                        "name": room,
+                        "isOpen": true,
+                    };
+                    roomSchemas.push(newRoom);
+                    roomSet.add(room);
+                }                                      
             });
-
-            // creates the new floor document and stores it in the db
-            const newFloor = new Models.Floor({
+            
+            const newFloor = {
                 "floorNumber": floorNumber,
-                "rooms": roomSchemas
-            });
+                "rooms" : roomSchemas
+            };
 
             // add the floor to facility
             newFacility["floors"].push(newFloor);
 
             await newFacility.save();
         }
-        
-        // // update the facility object
-        await Models.Facility.findByIdAndUpdate(id, newFacility, function(err, facility){
-            if (err) {
-                console.log(err);
-                STATUS = 400;
-                SUCCEEDED = false;
-            }
-        });
 
         res.status(STATUS).json({success: SUCCEEDED});        
     },
+    // TODO update such that no duplicate rows are added
     updateFloor: async (req, res, next) => {
-        let floorNumber = req.body.floorNumber;
+        let STATUS = 404;
+        let SUCCEEDED = false;
 
-        let newFacility = await Models.Facility.findOneAndUpdate(
-            {"_id":id, "floors":{ $elemMatch: {"floorNumber": floorNumber}}}, 
-            {upsert:true}, 
-            {"floors":{ $elemMatch: {"floorNumber": floorNumber, "floorNumber.rooms":{$push : {roomSchemas}}}}}
-        );
-        console.log(newFacility);
+        const {id, floorNumber} = req.params;
+        let roomsStr = req.body.rooms;
+
+        // get the floor that we want to update
+        Models.Facility.findOne({"_id": id}).then(function(facility, err){
+            // get the updated floor from the client 
+            const rooms = req.body.rooms;
+
+            // parse the updated floor
+            let roomsList = rooms.split(", ");
+            let roomSet = new Set();
+            roomsList.forEach(function(room){
+                if (!roomSet.has(room)){
+                    let newRoom = {
+                        "name":room,
+                        isOpen:true
+                    }
+                    roomsList.push(room);
+                    roomSet.add(room);
+                }
+            });
+            // TODO update the facility
+            console.log(facility.floors);
+        });
+        
+        res.status(STATUS).json({success: SUCCEEDED})
+    },
+    deleteFloor: async (req, res, next) => {
+        // get the URL params
+        const {id, floorNumber} = req.params;
+        let STATUS = 404;
+        let SUCCEEDED = false;
+        
+        // find the facility with the desired floor and remove the floor
+        Models.Facility.findOne({"_id":id}).then(function(facility,err){
+            if (err){
+                console.log(err);
+            }
+            const numFloors = facility.floors.length;
+            facility.floors.pop({"floorNumber":floorNumber});
+            // save the updated floor and confirm the floor has been removed
+            facility.save().then(function(){
+                Models.Facility.findOne({"_id":id}).then(function(result, err){
+                    if (result.floors.length < numFloors){
+                        STATUS = 200;
+                        SUCCEEDED = true;
+                    }
+                });
+            });
+        });
+        res.status(STATUS).json({"success": SUCCEEDED});
+    },
+    deleteFacility: async(req, res, next) => {
+        const {id} = req.params;
+        let STATUS = 400;
+        let SUCCEEDED = false;
+
+        const response = await Models.Facility.deleteOne({"_id":id});
+        if (response["n"] !== 0){
+            STATUS = 200;
+            SUCCEEDED = true;
+        }
+
+        res.status(STATUS).json({"success": SUCCEEDED});
     }
 }

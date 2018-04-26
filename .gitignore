@@ -61,3 +61,11 @@ typings/
 config/index.js
 
 .DS_STORE
+client/package.json
+*.json
+package-lock.json
+package.json
+package.json
+package-lock.json
+client/package-lock.json
+package.json
