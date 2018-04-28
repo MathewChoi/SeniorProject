@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Auth from '../Helpers/Authentication';
 
 class UpdateIssue extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class UpdateIssue extends Component {
       floor: '',
       room: '',
       category: '',
+      status: '',
     };
   }
   
@@ -22,7 +24,7 @@ class UpdateIssue extends Component {
     const id = this.props.match.params.id;
     axios.get('/api/issues/'+id, header)
       .then(res => {
-        this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category}, () => {
+        this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category, status: res.data.status}, () => {
           console.log(this.state);
         })
       })
@@ -31,7 +33,6 @@ class UpdateIssue extends Component {
 
   onChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
     const state = this.state;
     // apply title capitalization
     if (['name', 'room', 'building'].indexOf(name) !== -1) {
@@ -57,9 +58,10 @@ class UpdateIssue extends Component {
     let floor = this.state.floor;
     let room = this.state.room;
     let category = this.state.category;
+    let status = this.state.status;
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
     const id = this.props.match.params.id;
-    const data = { name, description, building, floor, room , category};
+    const data = { name, description, building, floor, room , category, status};
 
     axios.put('/api/issues/'+id, data, header)
     .then((res) => {
@@ -76,7 +78,11 @@ class UpdateIssue extends Component {
     let floor = this.state.floor;
     let room = this.state.room;
     let category = this.state.category;
+    let status = this.state.status;
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
+    const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
+    const isAdmin = Auth.isAdmin();
+
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -102,7 +108,7 @@ class UpdateIssue extends Component {
             <label>Room</label>
             <input type="text" className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="room" />
           </div>
-          <div className="form-group">+
+          <div className="form-group">
             <label>Category</label>
             <select className="form-control" name="category" value={category} onChange={this.onChange}>
               {options.map((option, i) => {
@@ -112,7 +118,18 @@ class UpdateIssue extends Component {
               })}
             </select>
           </div>
-          
+          { isAdmin && 
+            <div className="form-group">
+              <label>Status</label>
+              <select className="form-control" name="status" value={status} onChange={this.onChange}>
+                {statusOptions.map((option, i) => {
+                  return (
+                    <option value={option} key={i}>{option}</option>
+                  )
+                })}
+              </select>
+            </div>
+          }
           
           <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 
