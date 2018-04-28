@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './../stylesheets/SideNav.css';
+import logo from './../resources/home.svg';
 
 class SideNav extends Component {
 
