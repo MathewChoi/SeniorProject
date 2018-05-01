@@ -28,7 +28,7 @@ import UpdateUser from './Users/Update';
 
 
 const Main = () => (
-  <main>
+  <div className="main-panel">
     <Switch>
       <Route exact path="/" component={Home}/>
       <PrivateRoute path="/facilities/create" component={CreateFacility} />
@@ -54,7 +54,7 @@ const Main = () => (
 
       <Route component={GenericNotFound} />
     </Switch>
-  </main>
+  </div>
 )
 
 export default Main;
