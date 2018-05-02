@@ -25,36 +25,44 @@ import AdminDashboard from './Admin/AdminDashboard';
 
 import ReadUser from './Users/Read';
 import UpdateUser from './Users/Update';
-
+import MaterialNavBar from './MaterialNavBar';
+import Footer from './Footer';
 
 const Main = () => (
   <div className="main-panel">
-    <Switch>
-      <Route exact path="/" component={Home}/>
-      <PrivateRoute path="/facilities/create" component={CreateFacility} />
-      {/* <PrivateRoute path="/facilities" component={ReadFacility} /> */}
-      
-      <Route exact path="/issues" component={Issues}/>
-      <PrivateRoute exact path="/issues/create" component={CreateIssue}/>
-      <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>
-      <Route exact path="/issues/:id" component={ReadIssue}/>
-      <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/>
-      <Route exact path="/facilities" component={ListFacilities}/>
-      <Route exact path="/login" component={Login}/>
-      <Route exact path="/logout" component={Logout}/>
-      <Route exact path="/signup" component={Register}/>
-      <Route exact path="/about" component={About}/>
-      <PrivateRoute path="/dashboard" component={Dashboard}/>
+    <div className="content">
+      <div className="container-fluid">
+        <MaterialNavBar />
+        <Switch>
+          <Route exact path="/" component={Home}/>
+          <PrivateRoute path="/facilities/create" component={CreateFacility} />
+          {/* <PrivateRoute path="/facilities" component={ReadFacility} /> */}
+          
+          <Route exact path="/issues" component={Issues}/>
+          <PrivateRoute exact path="/issues/create" component={CreateIssue}/>
+          <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>
+          <Route exact path="/issues/:id" component={ReadIssue}/>
+          <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/>
+          <Route exact path="/facilities" component={ListFacilities}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/logout" component={Logout}/>
+          <Route exact path="/signup" component={Register}/>
+          <Route exact path="/about" component={About}/>
+          <PrivateRoute path="/dashboard" component={Dashboard}/>
 
-      <AdminRoute path="/admin/users/update/:id" component={UpdateUser}/>
-      <AdminRoute path="/admin/users/:id" component={ReadUser}/>
-      <AdminRoute path="/admin/users" component={AdminUsersPage}/>
-      <AdminRoute path="/admin/issues" component={AdminIssuesPage}/>
-      <AdminRoute path="/admin/dashboard" component={AdminDashboard}/>
+          <AdminRoute path="/admin/users/update/:id" component={UpdateUser}/>
+          <AdminRoute path="/admin/users/:id" component={ReadUser}/>
+          <AdminRoute path="/admin/users" component={AdminUsersPage}/>
+          <AdminRoute path="/admin/issues" component={AdminIssuesPage}/>
+          <AdminRoute path="/admin/dashboard" component={AdminDashboard}/>
 
-      <Route component={GenericNotFound} />
-    </Switch>
+          <Route component={GenericNotFound} />
+        </Switch>
+        <Footer/>
+      </div>
+    </div>
   </div>
+  
 )
 
 export default Main;

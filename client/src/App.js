@@ -1,16 +1,12 @@
 import React from 'react';
 import './App.css';
 import Main from './components/Main';
-import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 
 const App = () => (
-  <div>
-    {/* <Navbar /> */}
+  <div className="wrapper">
     <Sidebar />
-    <div className="container">
-      <Main />
-    </div>
+    <Main />
   </div>
 )
 
