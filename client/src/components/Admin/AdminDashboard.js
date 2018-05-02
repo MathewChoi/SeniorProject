@@ -40,12 +40,20 @@ class Dashboard extends Component {
 
   }
 
-  onDelete(id){
+  onDeleteIssue(id){
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
     if (window.confirm("Are you sure?")) {
-      axios.delete('/api/issues/'+id)
+      axios.delete('/api/issues/'+id,header)
       .then((result) => {
         window.location.reload();
       });
+    } 
+  }
+  onDeleteUser(id){
+    if (window.confirm("Are you sure?")) {
+      
+      alert(`//TODO: Delete User ${id}`);
+      
     } 
   }
     
@@ -116,7 +124,7 @@ class Dashboard extends Component {
         <div className="col-md-6">
           <div className="card">
               <div className="card-header card-header-primary">
-                  <h4 className="card-title">Latest Posted Issues</h4>
+                  <h4 className="card-title">New Issues</h4>
               </div>
               <div className="card-body">
                   <div className="table-responsive">
@@ -145,7 +153,7 @@ class Dashboard extends Component {
                                   <td className="td-actions">
                                     <Link to={`/issues/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
                                     <Link to={`/issues/update/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
-                                    <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                                    <button onClick={this.onDeleteIssue.bind(this, issue._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
                                   </td>
                                 </tr>
                               )
@@ -173,7 +181,7 @@ class Dashboard extends Component {
                             <thead className=" text-primary">
                               <tr>
                                 <th>Email</th>
-                                <th># Issues</th>
+                                {/* <th># Issues</th> */}
                                 <th>Role</th>
                                 <th></th>
                               </tr>
@@ -183,12 +191,11 @@ class Dashboard extends Component {
                                 return (
                                   <tr key={i}>
                                     <td>{user.email}</td>
-                                    <td>{user.issues.length}</td>
-                                    <td>{user.role}</td>                            
+                                    <td>{user.role}</td>     
                                     <td className="td-actions">
                                       <Link to={`/admin/users/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
                                       <Link to={`/admin/users/update/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
-                                      <button onClick={this.onDelete.bind(this, user._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                                      <button onClick={this.onDeleteUser.bind(this, user._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
                                     </td>
                                   </tr>
                                 )

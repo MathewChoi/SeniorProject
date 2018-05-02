@@ -1,39 +1,52 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavLink from './Helpers/NavLink';
+import Auth from './Helpers/Authentication';
 
 class Sidebar extends Component {
+
+  toggle() {
+    var toggler = document.getElementsByClassName("navbar-toggler")[0];
+    toggler.classList.remove("toggled");
+    var root = document.documentElement;
+    root.classList.remove('nav-open');
+  }
 
   render() {
     return (
       <div className="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
         <div className="logo">
-            <Link to="/" className="simple-text logo-normal">
+            <Link onClick={this.toggle.bind(this)} to="/" className="simple-text logo-normal">
               <i className="material-icons">build</i> Fixbit
             </Link>
         </div>
         <div className="sidebar-wrapper">
             <ul className="nav">
-              <NavLink to="/login">
-                <i className="material-icons">person</i>
-                <p>Login</p>
-              </NavLink>
-              <NavLink to="/admin/dashboard">
+              <NavLink onClick={this.toggle.bind(this)} to={ Auth.isAdmin() ? "/admin/dashboard" : "/dashboard"}>
                 <i className="material-icons">dashboard</i>
                 <p>Dashboard</p>
               </NavLink>
-              <NavLink to="/issues">
+              <NavLink onClick={this.toggle.bind(this)} to="/issues">
                 <i className="material-icons">error_outline</i>
                 <p>Issues</p>
               </NavLink>
-              <NavLink to="/facilities">
-                <i className="material-icons">home</i>
-                <p>facilities</p>
-              </NavLink>
-              <NavLink to="/issues/create">
+              <NavLink onClick={this.toggle.bind(this)} to="/issues/create">
                 <i className="material-icons">mode_edit</i>
                 <p>Report Issue</p>
               </NavLink>
+              { Auth.isAdmin() ?
+              <div>
+                <NavLink onClick={this.toggle.bind(this)} to="/facilities">
+                  <i className="material-icons">home</i>
+                  <p>Facilities</p>
+                </NavLink>
+                <NavLink onClick={this.toggle.bind(this)} to="/facilities/create">
+                  <i className="material-icons">add</i>
+                  <p>Add a Facility</p>
+                </NavLink>
+              </div>
+              :
+              <div></div>}
             </ul>
         </div>
       </div>

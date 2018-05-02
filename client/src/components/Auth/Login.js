@@ -59,21 +59,43 @@ class Login extends Component {
             {message}
           </div>
         }
-        <form className="form-signin" onSubmit={this.onSubmit}>
-          <h2 className="form-signin-heading">Login</h2>
-          <div className="form-group">
-            <label>Email address</label>
-            <input type="email" className="form-control" name="email" value={email} onChange={this.onChange} required placeholder="Enter email" />
+        <div className="row">
+          <div className="col-md-6 mx-auto">
+              <div className="card">
+                  <div className="card-header card-header-primary">
+                      <h4 className="card-title">User Login</h4>
+                      <p className="card-category">Enter profile information</p>
+                  </div>
+                  <div className="card-body">
+                      <form onSubmit={this.onSubmit}>
+                          
+                          <div className="row">
+                              <div className="col-md-12">
+                                  <div className="form-group">
+                                    <label>Email address</label>
+                                    <input type="email" className="form-control" name="email" value={email} onChange={this.onChange} required placeholder="Enter email" />
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="row">
+                              <div className="col-md-12">
+                                  <div className="form-group">
+                                    <label>Password</label>
+                                    <input type="password" className="form-control" name ="password" value={password} onChange={this.onChange} required placeholder="Password" />
+                                  </div>
+                              </div>
+                          </div>
+                          <div className="text-center">
+                            <button type="submit" className="btn btn-primary pull-right">Login</button>
+                            <br/>
+                            <small>Don't have an account? <Link to="/signup">Register</Link></small>
+                          </div>
+                          <div className="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
           </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input type="password" className="form-control" name ="password" value={password} onChange={this.onChange} required placeholder="Password" />
-          </div>
-          <button className="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-          <div className="text-center">
-            <small>Don't have an account? <Link to="/signup">Register</Link></small>
-          </div>
-        </form>
+        </div>
       </div>
     );
   }

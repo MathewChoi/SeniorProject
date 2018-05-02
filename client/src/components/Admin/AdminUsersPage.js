@@ -39,18 +39,18 @@ class AdminDashboard extends Component {
     
     return (
       <div className="row">
-        <div class="col-md-12">
-          <div class="card">
-              <div class="card-header card-header-primary">
-                  <h4 class="card-title">Users</h4>
+        <div className="col-md-12">
+          <div className="card">
+              <div className="card-header card-header-primary">
+                  <h4 className="card-title">Users</h4>
               </div>
-              <div class="card-body">
-                  <div class="table-responsive">
-                      <table class="table">
-                          <thead class=" text-primary">
+              <div className="card-body">
+                  <div className="table-responsive">
+                      <table className="table">
+                          <thead className=" text-primary">
                             <tr>
                               <th>Email</th>
-                              <th># Issues</th>
+                              {/* <th># Issues</th> */}
                               <th>Role</th>
                               <th>Created At</th>
                               <th>Updated At</th>
@@ -64,7 +64,7 @@ class AdminDashboard extends Component {
                               return (
                                 <tr key={i}>
                                   <td>{user.email}</td>
-                                  <td>{user.issues.length}</td>
+                                  {/* <td>{user.issues.length}</td> */}
                                   <td>{user.role}</td>
                                   <td>{ fomatted_Created }</td>
                                   <td>{ fomatted_Updated }</td>
