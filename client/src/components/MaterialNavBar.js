@@ -59,7 +59,7 @@ class MaterialNavBar extends Component {
                 <span className="navbar-toggler-icon icon-bar"></span>
                 <span className="navbar-toggler-icon icon-bar"></span>
             </button>
-            {links}
+            {/* {links} */}
         </div>
       </nav>
     );
