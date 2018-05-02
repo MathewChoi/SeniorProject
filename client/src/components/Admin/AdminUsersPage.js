@@ -38,37 +38,50 @@ class AdminDashboard extends Component {
     const users = this.state.users;
     
     return (
-      <div>
-        <h2>Users</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Email</th>
-              <th scope="col"># Issues</th>
-              <th scope="col">Role</th>
-              <th scope="col">Created At</th>
-              <th scope="col">Updated At</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user, i) => {
-              var fomatted_Created = moment(user.createdAt).format('MM-DD-YYYY hh:mm');
-              var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
-              return (
-                <tr key={i}>
-                  <td>{user.email}</td>
-                  <td>{user.issues.length}</td>
-                  <td>{user.role}</td>
-                  <td>{ fomatted_Created }</td>
-                  <td>{ fomatted_Updated }</td>
-                  <td>
-                    <Link to={`/admin/users/${user._id}`}>View</Link> | <Link to={`/admin/users/update/${user._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, user._id)} className="btn btn-outline-danger">Delete</button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+      <div className="row">
+        <div class="col-md-12">
+          <div class="card">
+              <div class="card-header card-header-primary">
+                  <h4 class="card-title">Users</h4>
+              </div>
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="table">
+                          <thead class=" text-primary">
+                            <tr>
+                              <th>Email</th>
+                              <th># Issues</th>
+                              <th>Role</th>
+                              <th>Created At</th>
+                              <th>Updated At</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {users.map((user, i) => {
+                              var fomatted_Created = moment(user.createdAt).format('MM-DD-YYYY hh:mm');
+                              var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
+                              return (
+                                <tr key={i}>
+                                  <td>{user.email}</td>
+                                  <td>{user.issues.length}</td>
+                                  <td>{user.role}</td>
+                                  <td>{ fomatted_Created }</td>
+                                  <td>{ fomatted_Updated }</td>
+                                  <td className="td-actions">
+                                    <Link to={`/admin/users/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
+                                    <Link to={`/admin/users/update/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
+                                    <button onClick={this.onDelete.bind(this, user._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                                  </td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
       </div>
     );
   }

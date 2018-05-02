@@ -4,7 +4,7 @@ class Footer extends Component {
   render() {
     return (
       <footer className="footer ">
-          <div className="container-fluid">
+          {/* <div className="container-fluid">
               <nav className="pull-left">
                   <ul>
                       <li>
@@ -36,7 +36,7 @@ class Footer extends Component {
                   </script>, made with love by
                   <a href="/" >Creative Tim</a> for a better web.
               </div>
-          </div>
+          </div> */}
       </footer>
     );
   }

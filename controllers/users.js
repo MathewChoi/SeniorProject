@@ -25,6 +25,15 @@ module.exports = {
     const user = await User.findById(userId);
     res.status(200).json(user);
   },
+  
+  // Get latest users
+  getLatestUsers: async (req, res, next) => {
+    // const {userId } = req.params;
+    // const issues = await Issue.find({}).sort( {"createdAt" : -1});
+    
+    const user = await User.find({}).sort( {"createdAt" : -1}).limit(5);
+    res.status(200).json(user);
+  },
 
   // Get User information
   replaceUser: async (req, res, next) => {
