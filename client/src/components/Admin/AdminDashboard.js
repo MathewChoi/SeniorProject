@@ -10,6 +10,7 @@ class Dashboard extends Component {
     this.state = {
       issues: [],
       data: {},
+      users: [],
     };
   }
 
@@ -28,20 +29,37 @@ class Dashboard extends Component {
       console.log(err);
     });
 
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
+    axios.get(`/api/users/latest`, header)
+    .then((res)=>{
+      this.setState({users: res.data});
+      // console.log(res.data);
+    }).catch(err =>{
+      console.log(err);
+    });
+
   }
 
-  onDelete(id){
+  onDeleteIssue(id){
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
     if (window.confirm("Are you sure?")) {
-      axios.delete('/api/issues/'+id)
+      axios.delete('/api/issues/'+id,header)
       .then((result) => {
         window.location.reload();
       });
     } 
   }
+  onDeleteUser(id){
+    if (window.confirm("Are you sure?")) {
+      
+      alert(`//TODO: Delete User ${id}`);
+      
+    } 
+  }
     
   render() {
     
-    const { data, issues } = this.state;
+    const { data, issues, users } = this.state;
     
     const { open, closed, inProgress } = data;
 
@@ -50,63 +68,150 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h1>Issues for {date}</h1>
-        <div className="container mt-5 mb-5">
-          <div className="row">
-            <div className="col-sm">
-              <h6>Open Issues</h6>
-              <p>{open} Issues</p>
-            </div>
-            <div className="col-sm">
-              <h6>In Progress Issues</h6>
-              <p>{inProgress} Issues</p>
-            </div>
-            <div className="col-sm">
-              <h6>Closed Issues</h6>
-              <p>{closed} Issues</p>
+        <h1>{date}</h1>
+        <div className="row">
+          <div className="col-md-4">
+              <div className="card card-stats">
+                  <div className="card-header card-header-danger card-header-icon">
+                      <div className="card-icon">
+                        <i className="material-icons">info_outline</i>
+                      </div>
+                      <p className="card-category">Open</p>
+                      <h3 className="card-title">{open} Issues</h3>
+                  </div>
+                  <div className="card-footer">
+                    <div className="stats">
+                      <i className="material-icons">date_range</i> This Month
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div className="col-md-4">
+              <div className="card card-stats">
+                  <div className="card-header card-header-warning card-header-icon">
+                      <div className="card-icon">
+                        <i className="material-icons">build</i>
+                      </div>
+                      <p className="card-category">In Progress</p>
+                      <h3 className="card-title">{inProgress} Issues</h3>
+                  </div>
+                  <div className="card-footer">
+                      <div className="stats">
+                          <i className="material-icons">date_range</i> This Month
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div className="col-md-4">
+              <div className="card card-stats">
+                  <div className="card-header card-header-success card-header-icon">
+                      <div className="card-icon">
+                          <i className="material-icons">done</i>
+                      </div>
+                      <p className="card-category">Fixed</p>
+                      <h3 className="card-title">{closed} Issues</h3>
+                  </div>
+                  <div className="card-footer">
+                    <div className="stats">
+                      <i className="material-icons">date_range</i> This Month
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card">
+              <div className="card-header card-header-primary">
+                  <h4 className="card-title">New Issues</h4>
+              </div>
+              <div className="card-body">
+                  <div className="table-responsive">
+                      <table className="table">
+                          <thead className=" text-primary">
+                            <tr>
+                              <th>Name</th>
+                              {/* <th>Description</th> */}
+                              <th>Building</th>
+                              {/* <th>Floor</th>
+                              <th>Room</th> */}
+                              <th>Category</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {issues.map((issue, i) => {
+                              return (
+                                <tr key={i}>
+                                  <td>{issue.name}</td>
+                                  {/* <td>{issue.description}</td> */}
+                                  <td>{issue.building}</td>
+                                  {/* <td>{issue.floor}</td>
+                                  <td>{issue.room}</td> */}
+                                  <td>{issue.category}</td>
+                                  <td className="td-actions">
+                                    <Link to={`/issues/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
+                                    <Link to={`/issues/update/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
+                                    <button onClick={this.onDeleteIssue.bind(this, issue._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                                  </td>
+                                </tr>
+                              )
+                            })}
+                          </tbody>
+                      </table>
+                      <div className="text-center">
+                        <Link className="btn btn-primary" to="/admin/issues">
+                          View More Issues
+                        </Link>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+      
+        <div className="col-md-6">
+            <div className="card">
+                <div className="card-header card-header-primary">
+                    <h4 className="card-title">New Users</h4>
+                </div>
+                <div className="card-body">
+                    <div className="table-responsive">
+                        <table className="table">
+                            <thead className=" text-primary">
+                              <tr>
+                                <th>Email</th>
+                                {/* <th># Issues</th> */}
+                                <th>Role</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {users.map((user, i) => {
+                                return (
+                                  <tr key={i}>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>     
+                                    <td className="td-actions">
+                                      <Link to={`/admin/users/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
+                                      <Link to={`/admin/users/update/${user._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
+                                      <button onClick={this.onDeleteUser.bind(this, user._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                                    </td>
+                                  </tr>
+                                )
+                              })}
+                            </tbody>
+                        </table>
+                        <div className="text-center">
+                          <Link className="btn btn-primary" to="/admin/users">
+                            View More users
+                          </Link>
+                        </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
-
-        <Link to="/admin/users">
-          View Users
-        </Link>
-        <br/ >
-        <Link to="/admin/issues">
-          View Issues
-        </Link>
-
-
-        <h2>Latest Posted Issues</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-              <th scope="col">Building</th>
-              <th scope="col">Floor</th>
-              <th scope="col">Room</th>
-              <th scope="col">Category</th>
-            </tr>
-          </thead>
-          <tbody>
-          {issues.map((issue, i) => {
-              return (
-                <tr key={i}>
-                  <td>{issue.name}</td>
-                  <td>{issue.description}</td>
-                  <td>{issue.building}</td>
-                  <td>{issue.floor}</td>
-                  <td>{issue.room}</td>
-                  <td>{issue.category}</td>
-                  <td>
-                    <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/update/${issue._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-outline-danger">Delete</button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
       </div>
     );
   }

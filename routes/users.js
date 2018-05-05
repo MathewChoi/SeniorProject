@@ -11,6 +11,10 @@ router.route('/')
   // Register a new user
   .post(UsersController.register);
 
+router.route('/latest')
+  // List all the users
+  .get(UsersController.getLatestUsers);
+
 router.route('/auth')
   // Signin returns jwt
   .post(UsersController.auth);
