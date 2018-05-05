@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import auth from './Helpers/Authentication.js';
 import axios from 'axios';
 import '../styles/issues.css';
 var moment = require('moment');
@@ -39,7 +40,7 @@ class Issues extends Component {
   render() {
     const issueItems = this.state.issues;
     return (
-      <div className="card">
+      <div className="card" style={{width:'880px'}}>
         <div className="card-header card-header-primary">
             <h4 className="card-title ">View all issues</h4>
         </div>
@@ -82,7 +83,10 @@ class Issues extends Component {
                     <td>{issue.category}</td>
                     <td>{createdAt}</td>
                     <td>
-                      <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/update/${issue._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-outline-danger">Delete</button>
+                      <button className="fa fa-eye" onClick={()=>{this.props.history.push(`/issues/${issue._id}`);}} />
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-pencil" onClick={()=>{this.props.history.push(`/issues/update/${issue._id}`);}} /> } &nbsp;
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-trash" onClick={this.onDelete.bind(this, issue._id)} /> }
+                      
                     </td>
                   </tr>
                 )

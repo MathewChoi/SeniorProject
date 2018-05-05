@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import auth from '../Helpers/Authentication';
 import axios from 'axios';
 import '../../styles/issues.css';
 var moment = require('moment');
@@ -54,19 +55,20 @@ class FacilityIssues extends Component {
     const issueItems = this.state.issues;
     const url= window.location.pathname.split('/');
     return (
-      <div className="card">
+      <div className="card" style={{width:'890px'}}>
         <div className="card-header card-header-primary">
-            <h4 className="card-title ">{url[3]}</h4>
-            <select className="form-control" value={this.state.query} onChange={this.onChange}>
-              <option value='?sort=createdAt&order=-1'>Sort by recently reported</option>
-              <option value='?sort=createdAt&order=1'>Sort by earliest reported</option>
-              <option value='?sort=name&order=1'>Sort by issues in alphabetical order (A-Z)</option>
-              <option value='?sort=name&order=-1'>Sort by issues in alphabetical order (Z-A)</option>
-              <option value='?sort=floor&order=1'>Sort by floor (LOW to HIGH)</option>
-              <option value='?sort=floor&order=-1'>Sort by floor(HIGH to LOW)</option>
-            </select>
+            <h1 className="card-title ">{url[3]}</h1>
         </div>
         <div className="card-body">
+          <select className="form-control" value={this.state.query} onChange={this.onChange}> 
+            <option>Sort by...</option>
+            <option value='?sort=createdAt&order=-1'>Sort by recently reported</option>
+            <option value='?sort=createdAt&order=1'>Sort by earliest reported</option>
+            <option value='?sort=name&order=1'>Sort by issues in alphabetical order (A-Z)</option>
+            <option value='?sort=name&order=-1'>Sort by issues in alphabetical order (Z-A)</option>
+            <option value='?sort=floor&order=1'>Sort by floor (LOW to HIGH)</option>
+            <option value='?sort=floor&order=-1'>Sort by floor(HIGH to LOW)</option>
+          </select>
             <div className="table-responsive">
                 <table className="table">
                     <thead className=" text-primary">
@@ -79,7 +81,7 @@ class FacilityIssues extends Component {
                         <th>
                             Building
                         </th>
-                        <th>
+                        <th >
                             Floor
                         </th>
                         <th>
@@ -105,7 +107,12 @@ class FacilityIssues extends Component {
                     <td>{issue.category}</td>
                     <td>{createdAt}</td>
                     <td>
-                      <Link to={`/issues/${issue._id}`}>View</Link> | <Link to={`/issues/update/${issue._id}`}>Edit</Link> | <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-outline-danger">Delete</button>
+                      <button className="fa fa-eye" onClick={()=>{this.props.history.push(`/issues/${issue._id}`);}} />
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-pencil" onClick={()=>{this.props.history.push(`/issues/update/${issue._id}`);}} /> } &nbsp;
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-trash" onClick={this.onDelete.bind(this, issue._id)} /> }
+                      
+                      
+                      
                     </td>
                   </tr>
                 )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/issues.css';
 
 class ListFacilites extends Component {
 
@@ -33,12 +34,13 @@ class ListFacilites extends Component {
         
         {facilityItems.map((facility, i) => {
           return (
-            <li key={i}>
-              <Link to={`/issues/facility-issues/${facility.name}`} >
-                {facility.name}
-              </Link>
-              
-            </li>
+            <div >
+              <div className="facility-card" key={i}>
+                <Link to={`/issues/facility-issues/${facility.name}`} >
+                  {facility.name}
+                </Link>
+              </div>
+            </div>
           )
         })}
       </div>

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import auth from '../Helpers/Authentication';
 import NotFound from '../Notfound';
 
+var moment = require('moment');
+
 class ReadIssue extends Component {
 
   constructor(){
@@ -35,14 +37,13 @@ class ReadIssue extends Component {
   render() {
     const issue = this.state.issue;
     if(issue != null){
-      var date = new Date (String(issue.createdAt).substring(0,19));
-      var time = String(issue.createdAt).substring(11,16);
-      var dateCreated = (date.getMonth()+1)+"-" + (date.getDate()) + "-" +date.getFullYear() + "   " + time ;
-    
+      var createdAt = moment(issue.createdAt).format('MM-DD-YYYY h:mm:ss a');
       return (
-        <div>
-          <h1>Issues</h1>
-            <p>Name: {issue.name}</p>
+        <div className="card" style={{width:'890px'}}>
+          <div className="card-header card-header-primary">
+              <h1 className="card-title ">{issue.name}</h1>
+          </div>
+          <div className="card-body">
             <p>Description: {issue.description}</p>
             <p>Building: {issue.building}</p>
             <p>Floor: {issue.floor}</p>
@@ -50,11 +51,14 @@ class ReadIssue extends Component {
             <p>Category: {issue.category}</p>
             <p>Status: {issue.status}</p>
             <p>Status Description: {issue.statusDescription}</p>
-            <p>Created At: {dateCreated}</p>
+            <p>Created At: {createdAt}</p>
 
             { (auth.getUser() === issue.creator || auth.isAdmin()) && <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link> } &nbsp;
             { (auth.getUser() === issue.creator || auth.isAdmin()) && <button onClick={this.onDelete.bind(this, this.state.issue._id)} className="btn btn-outline-danger">Delete</button> }
+        
+          </div>
         </div>
+             
       );
     }
     else{
