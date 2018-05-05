@@ -51,7 +51,6 @@ class MaterialNavBar extends Component {
       <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div className="container-fluid">
             <div className="navbar-wrapper">
-            <Link className="navbar-brand" to="/">Fixbit</Link>
             </div>
             <button className="navbar-toggler" onClick={this.toggle.bind(this)} type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="sr-only">Toggle navigation</span>
