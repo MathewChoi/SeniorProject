@@ -42,7 +42,7 @@ class Issues extends Component {
     return (
       <div className="card" style={{width:'880px'}}>
         <div className="card-header card-header-primary">
-            <h4 className="card-title ">View all issues</h4>
+            <h1 className="card-title ">View all issues</h1>
         </div>
         <div className="card-body">
             <div className="table-responsive">
