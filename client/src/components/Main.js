@@ -30,8 +30,7 @@ import Footer from './Footer';
 
 const Main = () => (
   <div className="main-panel">
-    <div className="content">
-      <div className="container-fluid">
+    <div className="content" style={{marginTop:'0px'}}>
         <MaterialNavBar />
         <Switch>
           <Route exact path="/" component={Home}/>
@@ -59,7 +58,7 @@ const Main = () => (
           <Route component={GenericNotFound} />
         </Switch>
         <Footer/>
-      </div>
+  
     </div>
   </div>
   

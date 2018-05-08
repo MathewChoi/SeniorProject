@@ -1,7 +1,5 @@
-.dark{
+.full-width{
     width: 100%;
-    
-    margin-bottom: 10px; 
     
 }
 
@@ -27,3 +25,25 @@
 .location{
     display: inline-flex;
 }
+
+.facility-card {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 10px;
+    background-color: #9c27b0;
+    
+    border-radius: 3px;
+    color: #FFFFFF;}
+    .facility-card > a{
+        color: white;
+        font-size: 30px;
+    }
+    .facility-card > a:hover{
+        color:white;
+        font-size: 30px;
+    }
+
+    .facility-card:hover{
+        border-color: black;
+        
+        box-shadow: 5px 5px grey;
+    }

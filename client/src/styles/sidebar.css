@@ -1,0 +1,18 @@
+.sidebar-collapse{
+    margin: 10px 15px 0;
+    border-radius: 3px;
+    color: #3C4858;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-transform: capitalize;
+    font-size: 16px;
+    padding: 10px 15px
+}
+.sidebar-collapse:hover{
+    background-color: #EEEEEE;
+    
+}
+
+.collapsed{
+    font-size: 14px;
+}
