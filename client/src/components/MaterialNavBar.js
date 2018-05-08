@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Auth from './Helpers/Authentication';
+// import Auth from './Helpers/Authentication';
 
 
 class MaterialNavBar extends Component {
@@ -14,39 +14,6 @@ class MaterialNavBar extends Component {
   }
   
   render() {
-    const links = Auth.isAuthenticated() ? (
-      <div className="collapse navbar-collapse justify-content-end" id="navigation">
-        <ul className="navbar-nav">
-        
-            <li className="nav-item">
-              <Link className="nav-link" to="/logout">
-                Logout
-              </Link>
-            </li>
-
-        </ul>
-      </div>
-    ) : (
-      <div className="collapse navbar-collapse justify-content-end" id="navigation">
-        <ul className="navbar-nav">
-        
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              or
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup">
-                Signup
-              </Link>
-            </li>
-
-        </ul>
-      </div>
-    );
     return (
       <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
         <div className="container-fluid">
