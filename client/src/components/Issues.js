@@ -29,8 +29,9 @@ class Issues extends Component {
   } 
 
   onDelete(id){
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
     if (window.confirm("Are you sure?")) {
-      axios.delete('/api/issues/'+id)
+      axios.delete('/api/issues/'+id,header)
       .then((result) => {
         window.location.reload();
       });
