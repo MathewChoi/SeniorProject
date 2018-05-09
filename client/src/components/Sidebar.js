@@ -58,11 +58,11 @@ class Sidebar extends Component {
                   <i className="material-icons">remove_red_eye</i>
                   <p>View All Issues</p>
                 </NavLink>
-
-                <NavLink onClick={this.toggle.bind(this)} to="/facilities">
+                {!Auth.isAdmin() ? <NavLink onClick={this.toggle.bind(this)} to="/facilities">
                   <i className="material-icons">remove_red_eye</i>
                   <p>View Issues By Facility</p>
-                </NavLink>
+                </NavLink>:<div></div>}
+                
 
                 <NavLink onClick={this.toggle.bind(this)} to="/issues/create">
                   <i className="material-icons">mode_edit</i>
