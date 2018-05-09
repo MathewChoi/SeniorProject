@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 const config = require('./config');
-
 const index = require('./routes/index');
 const issues = require('./routes/issues');
 const users = require('./routes/users');

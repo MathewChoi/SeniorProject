@@ -33,8 +33,8 @@ module.exports = {
 
     // adds a floor to the facility with the id from the url params
     addFloor: async (req, res, next) => {
-        let STATUS = 200;
-        let SUCCEEDED = true;
+        let STATUS = 400;
+        let SUCCEEDED = false;
 
         // get the facility id from the url
         const { id } = req.params;
@@ -42,8 +42,6 @@ module.exports = {
         let newFacility = await Models.Facility.findById(id, function(err, facility){
             if (err) {
                 console.log(err);
-                STATUS = 400;
-                SUCCEEDED = false;
             }
         });
 
@@ -57,19 +55,18 @@ module.exports = {
             function(err, facility){
                 if (err) {
                     console.log(err);
-                    STATUS = 400;
-                    SUCCEEDED = false;
                 }  
         });
+        
+        console.log("The matching floor is ...");
         console.log(matchingFloor);
-        if (matchingFloor !== null) {
-            STATUS = 400;
-            SUCCEEDED = false;
-        }
 
-        if (matchingFloor === null){
+        if (matchingFloor === null) {
+            STATUS = 201;
+            SUCCEEDED = true;
+
             // add the rooms to the list of rooms for the floor
-            let roomlist = roomsStr.split(', ');
+            let roomlist = roomsStr.split(',');
             let roomSchemas = [];
             let roomSet = new Set(); 
             roomlist.forEach(function(room){

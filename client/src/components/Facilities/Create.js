@@ -37,7 +37,7 @@ class CreateFacility extends Component {
 
         axios.post('/api/facilities', data, header)
         .then((res) => {
-            this.props.history.push("/issues");
+            this.props.history.push("/facilities");
         }).catch(err => {
             console.log(err);
         });

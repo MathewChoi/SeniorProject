@@ -69,3 +69,9 @@ package.json
 package-lock.json
 client/package-lock.json
 package.json
+package-lock.json
+package.json
+client/package-lock.json
+client/package.json
+client/package-lock.json
+*.json
