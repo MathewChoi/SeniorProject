@@ -41,7 +41,7 @@ class UpdateIssue extends Component {
     }
     axios.patch('/api/users/'+id, data, header)
     .then((res) => {
-      window.location.reload();
+      this.props.history.goBack();
     }).catch(err => {
       console.log(err);
     });
@@ -50,26 +50,44 @@ class UpdateIssue extends Component {
   render() {
     const { user, issues, role } = this.state;
     return (
-      <div>
-        <div>
-        <h1>User</h1>
-        <form onSubmit={this.onSubmit}>
-          <p>ID: {user._id}</p>
-          <p>Email: {user.email}</p>
-          <p>Role:
-            <select value={role} name="role" onChange={this.onChange}>
-              <option value="ADMIN">ADMIN</option>
-              <option value="PERSONNEL">PERSONNEL</option>
-              <option value="GUEST">GUEST</option>
-            </select>
-          </p>
-          <p># Issues: {issues.length}</p>
-          <p>Created At: {user.createdAt}</p>
-          <p>Updated At: {user.updatedAt}</p>
-          <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
-        </form>
+      <div className="card">
+        <div className="card-header card-header-primary">
+          <h1 className="card-title ">Edit User</h1>
+        </div>
+        <div className="card-body">
+          <form onSubmit={this.onSubmit}>
+            <p>ID: {user._id}</p>
+            <p>Email: {user.email}</p>
+            <p>Role:
+              <select className="form-control" value={role} name="role" onChange={this.onChange}>
+                <option value="ADMIN">ADMIN</option>
+                <option value="PERSONNEL">PERSONNEL</option>
+                <option value="GUEST">GUEST</option>
+              </select>
+            </p>
+            <p>Created At: {user.createdAt}</p>
+            <p>Updated At: {user.updatedAt}</p>
+            <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+          </form>
+        </div>
       </div>
-      </div>
+    //   <div>
+    //   <h1>User</h1>
+    //   <form onSubmit={this.onSubmit}>
+    //     <p>ID: {user._id}</p>
+    //     <p>Email: {user.email}</p>
+    //     <p>Role:
+    //       <select value={role} name="role" onChange={this.onChange}>
+    //         <option value="ADMIN">ADMIN</option>
+    //         <option value="PERSONNEL">PERSONNEL</option>
+    //         <option value="GUEST">GUEST</option>
+    //       </select>
+    //     </p>
+    //     <p>Created At: {user.createdAt}</p>
+    //     <p>Updated At: {user.updatedAt}</p>
+    //     <button className="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+    //   </form>
+    // </div>
     );
   }
 }
