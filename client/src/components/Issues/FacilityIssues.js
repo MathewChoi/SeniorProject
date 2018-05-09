@@ -57,7 +57,8 @@ class FacilityIssues extends Component {
     return (
       <div className="card">
         <div className="card-header card-header-primary">
-            <h1 className="card-title ">{url[3]}</h1>
+            {/* <h1 className="card-title ">{url[3]}</h1> */}
+            <h1 className="card-title ">{this.props.match.params.facility}</h1>
         </div>
         <div className="card-body">
           <select className="form-control" value={this.state.query} onChange={this.onChange}> 
