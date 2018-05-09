@@ -36,7 +36,7 @@ class Login extends Component {
           
           // If user is admin redirect to admin dashboard else redirect to issues page
           
-          const pathname = Auth.isAdmin() === true ? '/admin/dashboard' : '/issues';
+          const pathname = Auth.isAdmin() === true ? '/admin/dashboard' : '/dashboard';
 
           this.props.history
           .push({

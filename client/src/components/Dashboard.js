@@ -81,13 +81,17 @@ class Dashboard extends Component {
     
     return (
       <div>
-        <h1>{date}</h1>
+        <div className="row">
+          <div className="col-md-12">
+            <h1>{date}</h1>
+          </div>
+        </div>
         <div className="row">
           <div className="col-md-4">
               <div className="card card-stats">
                   <div className="card-header card-header-danger card-header-icon">
                       <div className="card-icon">
-                        <i className="material-icons">info_outline</i>
+                        <i className="material-icons">error_outline</i>
                       </div>
                       <p className="card-category">Open</p>
                       <h3 className="card-title">{open} Issues</h3>

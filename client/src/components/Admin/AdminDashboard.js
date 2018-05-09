@@ -74,7 +74,7 @@ class Dashboard extends Component {
               <div className="card card-stats">
                   <div className="card-header card-header-danger card-header-icon">
                       <div className="card-icon">
-                        <i className="material-icons">info_outline</i>
+                        <i className="material-icons">error_outline</i>
                       </div>
                       <p className="card-category">Open</p>
                       <h3 className="card-title">{open} Issues</h3>
