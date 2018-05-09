@@ -55,7 +55,7 @@ class FacilityIssues extends Component {
     const issueItems = this.state.issues;
     const url= window.location.pathname.split('/');
     return (
-      <div className="card" style={{width:'890px'}}>
+      <div className="card">
         <div className="card-header card-header-primary">
             <h1 className="card-title ">{url[3]}</h1>
         </div>
@@ -73,7 +73,7 @@ class FacilityIssues extends Component {
                 <table className="table">
                     <thead className=" text-primary">
                         <th>
-                         Issue Name   
+                        Issue Name   
                         </th>
                         <th>
                             Description
@@ -90,9 +90,9 @@ class FacilityIssues extends Component {
                         <th>
                             Category
                         </th>
-                        <th>
+                        {/* <th>
                           Date Created
-                        </th>
+                        </th> */}
                     </thead>
                     <tbody>
                     {issueItems.map((issue, i) => {
@@ -105,25 +105,22 @@ class FacilityIssues extends Component {
                     <td>{issue.floor}</td>
                     <td>{issue.room}</td>
                     <td>{issue.category}</td>
-                    <td>{createdAt}</td>
-                    <td>
-                      <button className="fa fa-eye" onClick={()=>{this.props.history.push(`/issues/${issue._id}`);}} />
-                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-pencil" onClick={()=>{this.props.history.push(`/issues/update/${issue._id}`);}} /> } &nbsp;
-                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="fa fa-trash" onClick={this.onDelete.bind(this, issue._id)} /> }
-                      
-                      
+                    {/* <td>{createdAt}</td> */}
+                    <td className="td-actions">
+                      <button className="btn btn-primary btn-link btn-sm" onClick={()=>{this.props.history.push(`/issues/${issue._id}`);}}><i className="material-icons">search</i></button>
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="btn btn-primary btn-link btn-sm" onClick={()=>{this.props.history.push(`/issues/update/${issue._id}`);}}><i className="material-icons">mode_edit</i></button> } &nbsp;
+                      { (auth.getUser() === issue.creator || auth.isAdmin()) && <button className="btn btn-danger btn-link btn-sm" onClick={this.onDelete.bind(this, issue._id)}><i className="material-icons">close</i></button> }
                       
                     </td>
                   </tr>
                 )
               })}
                         
-                    </tbody>
-                </table>
-            </div>
+              </tbody>
+            </table>
+          </div>
         </div>
-    </div>
-
+      </div>
     );
   }
 }

@@ -39,50 +39,46 @@ class AdminDashboard extends Component {
     const issues = this.state.issues;
     
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <div className="card">
-              <div className="card-header card-header-primary">
-                  <h4 className="card-title">Latest Posted Issues</h4>
-              </div>
-              <div className="card-body">
-                  <div className="table-responsive">
-                      <table className="table">
-                          <thead className=" text-primary">
-                            <tr>
-                              <th>Name</th>
-                              <th>Description</th>
-                              <th>Building</th>
-                              <th>Floor</th>
-                              <th>Room</th>
-                              <th>Category</th>
-                              <th></th>
+      <div className="card">
+          <div className="card-header card-header-primary">
+              <h4 className="card-title">Latest Posted Issues</h4>
+          </div>
+          <div className="card-body">
+              <div className="table-responsive">
+                  <table className="table">
+                      <thead className=" text-primary">
+                        <tr>
+                          <th>Name</th>
+                          <th>Description</th>
+                          <th>Building</th>
+                          <th>Floor</th>
+                          <th>Room</th>
+                          <th>Category</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {issues.map((issue, i) => {
+                          return (
+                            <tr key={i}>
+                              <td>{issue.name}</td>
+                              <td>{issue.description}</td>
+                              <td>{issue.building}</td>
+                              <td>{issue.floor}</td>
+                              <td>{issue.room}</td>
+                              <td>{issue.category}</td>
+                              <td className="td-actions">
+                                <Link to={`/issues/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
+                                <Link to={`/issues/update/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
+                                <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {issues.map((issue, i) => {
-                              return (
-                                <tr key={i}>
-                                  <td>{issue.name}</td>
-                                  <td>{issue.description}</td>
-                                  <td>{issue.building}</td>
-                                  <td>{issue.floor}</td>
-                                  <td>{issue.room}</td>
-                                  <td>{issue.category}</td>
-                                  <td className="td-actions">
-                                    <Link to={`/issues/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">search</i></Link>
-                                    <Link to={`/issues/update/${issue._id}`} className="btn btn-primary btn-link btn-sm"><i className="material-icons">mode_edit</i></Link>
-                                    <button onClick={this.onDelete.bind(this, issue._id)} className="btn btn-danger btn-link btn-sm"><i className="material-icons">close</i></button>
-                                  </td>
-                                </tr>
-                              )
-                            })}
-                          </tbody>
-                      </table>
-                  </div>
+                          )
+                        })}
+                      </tbody>
+                  </table>
               </div>
           </div>
-        </div>
       </div>
     );
   }

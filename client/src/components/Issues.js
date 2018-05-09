@@ -41,7 +41,7 @@ class Issues extends Component {
   render() {
     const issueItems = this.state.issues;
     return (
-      <div className="card" style={{width:'880px'}}>
+      <div className="card">
         <div className="card-header card-header-primary">
             <h1 className="card-title ">View all issues</h1>
         </div>
@@ -50,7 +50,7 @@ class Issues extends Component {
                 <table className="table">
                     <thead className=" text-primary">
                         <th>
-                         Issue Name   
+                        Issue Name   
                         </th>
                         <th>
                             Description
@@ -92,13 +92,11 @@ class Issues extends Component {
                   </tr>
                 )
               })}
-                        
-                    </tbody>
-                </table>
-            </div>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
-
     );
   }
 }

@@ -28,10 +28,13 @@ class ReadIssue extends Component {
   }
 
   onDelete(id){
-    axios.delete('/api/issues/'+id)
+    const header = { headers: {"Authorization": localStorage.getItem('token')}};
+    if (window.confirm("Are you sure?")) {
+      axios.delete('/api/issues/'+id,header)
       .then((result) => {
-        this.props.history.push("/issues");
+        this.props.history.goBack();
       });
+    } 
   }
 
   render() {
@@ -39,9 +42,9 @@ class ReadIssue extends Component {
     if(issue != null){
       var createdAt = moment(issue.createdAt).format('MM-DD-YYYY h:mm:ss a');
       return (
-        <div className="card" style={{width:'890px'}}>
+        <div className="card">
           <div className="card-header card-header-primary">
-              <h1 className="card-title ">{issue.name}</h1>
+            <h1 className="card-title ">{issue.name}</h1>
           </div>
           <div className="card-body">
             <p>Description: {issue.description}</p>
@@ -52,13 +55,10 @@ class ReadIssue extends Component {
             <p>Status: {issue.status}</p>
             <p>Status Description: {issue.statusDescription}</p>
             <p>Created At: {createdAt}</p>
-
             { (auth.getUser() === issue.creator || auth.isAdmin()) && <Link className="btn btn-outline-primary" to={`update/${issue._id}`}>Edit</Link> } &nbsp;
             { (auth.getUser() === issue.creator || auth.isAdmin()) && <button onClick={this.onDelete.bind(this, this.state.issue._id)} className="btn btn-outline-danger">Delete</button> }
-        
           </div>
         </div>
-             
       );
     }
     else{
