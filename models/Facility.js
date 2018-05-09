@@ -38,7 +38,7 @@ let FacilitySchema = new Schema({
         default: true
     },
     floors: []
-    // issues:[{type: Schema.Types.ObjectId, ref: 'Issue'}]
+    // issues : [{type: Schema.Types.ObjectId, ref: 'Issue'}]
 });
 
 // Get the Facility by the id
