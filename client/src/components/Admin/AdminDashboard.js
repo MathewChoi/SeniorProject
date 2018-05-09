@@ -118,7 +118,7 @@ class Dashboard extends Component {
                   </div>
               </div>
           </div>
-      </div>
+        </div>
 
       <div className="row">
         <div className="col-md-6">
