@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Auth from '../Helpers/Authentication';
 
 class UpdateIssue extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class UpdateIssue extends Component {
       building: '',
       floor: '',
       room: '',
+<<<<<<< HEAD
       category: 'PLUMBING',
       facilities: [{
         name:'',
@@ -25,6 +27,10 @@ class UpdateIssue extends Component {
       }],
       floors:[],
       rooms:[]
+=======
+      category: '',
+      status: '',
+>>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
     };
   }
   
@@ -34,9 +40,16 @@ componentWillMount() {
     const id = this.props.match.params.id;
     
     axios.get('/api/issues/'+id, header)
+<<<<<<< HEAD
       .then(res => { 
           this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category}, () => {
         })        
+=======
+      .then(res => {
+        this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category, status: res.data.status}, () => {
+          console.log(this.state);
+        })
+>>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
       })
       .catch(err => console.log(err));
 
@@ -98,7 +111,6 @@ componentWillMount() {
 
   onChange = (event) => {
     const name = event.target.name;
-    const value = event.target.value;
     const state = this.state;
     // apply title capitalization
     if (name==='name') {
@@ -124,10 +136,20 @@ componentWillMount() {
   
   onSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     const { name, description, building, floor, room, category } = this.state;
+=======
+    let name = this.state.name;
+    let description = this.state.description;
+    let building = this.state.building;
+    let floor = this.state.floor;
+    let room = this.state.room;
+    let category = this.state.category;
+    let status = this.state.status;
+>>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
     const id = this.props.match.params.id;
-    const data = { name, description, building, floor, room , category};
+    const data = { name, description, building, floor, room , category, status};
 
     axios.put('/api/issues/'+id, data, header)
     .then((res) => {
@@ -138,10 +160,24 @@ componentWillMount() {
   }
 
   render() {
+<<<<<<< HEAD
     let { name, description, building, floor, room, category, facilities, floors, rooms} = this.state;
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const floorlist = floors.map(floor => floor.floorNumber);
     const roomlist = rooms.map(room => room.name);
+=======
+    let name = this.state.name;
+    let description = this.state.description;
+    let building = this.state.building;
+    let floor = this.state.floor;
+    let room = this.state.room;
+    let category = this.state.category;
+    let status = this.state.status;
+    const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
+    const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
+    const isAdmin = Auth.isAdmin();
+
+>>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>
@@ -191,7 +227,7 @@ componentWillMount() {
               })}
             </select>
           </div>
-          <div className="form-group">+
+          <div className="form-group">
             <label>Category</label>
             <select className="form-control" name="category" value={category} onChange={this.onChange}>
               {options.map((option, i) => {
@@ -201,7 +237,18 @@ componentWillMount() {
               })}
             </select>
           </div>
-          
+          { isAdmin && 
+            <div className="form-group">
+              <label>Status</label>
+              <select className="form-control" name="status" value={status} onChange={this.onChange}>
+                {statusOptions.map((option, i) => {
+                  return (
+                    <option value={option} key={i}>{option}</option>
+                  )
+                })}
+              </select>
+            </div>
+          }
           
           <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 

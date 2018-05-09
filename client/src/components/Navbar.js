@@ -27,8 +27,12 @@ class Navbar extends Component {
         <h5 className="my-0 mr-md-auto font-weight-normal"><Link className="p-2 text-dark" to="/">Fixbit</Link></h5>
         <nav className="my-2 my-md-0 mr-md-3">
           <Link className="p-2 text-dark" to="/issues">Issues</Link>
+<<<<<<< HEAD
           <Link className="p-2 text-dark" to="/facilities">Facilities</Link>
 
+=======
+          <Link className="p-2 text-dark" to="/facilities">Issues by Facility</Link>
+>>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
           <Link className="p-2 text-dark" to="/issues/create">Report Issue</Link>
           {/* <Link className="p-2 text-dark" to="/about">About</Link> */}
           <Link className="p-2 text-dark" to="/dashboard">Dashboard</Link>

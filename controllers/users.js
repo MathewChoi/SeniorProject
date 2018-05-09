@@ -38,11 +38,38 @@ module.exports = {
   // Get User information
   updateUser: async (req, res, next) => {
     // Body may contain any number of fields
-    const {userId } = req.params;
-    const newUser = req.body;
-    const result = await User.findByIdAndUpdate(userId,newUser);
-    res.status(200).json({success: true});
+    const user  = req.user; // user from passport authentication
+    const { userId } = req.params; // userId being updated
+
+    if(user.role === "ADMIN"){
+      const newUser = req.body;
+      const result = await User.findByIdAndUpdate(userId,newUser);
+      console.log(result);
+      res.status(200).json({success: true});
+    }else{
+      res.status(401).json({success: false});
+    }
   },
+
+  // Get User information
+  // updateUser: async (req, res, next) => {
+  //   // Body may contain any number of fields
+    
+  //   const user  = req.user;
+
+  //   const { userBeingUpdatedId } = req.params;
+
+  //   if(user._id === userBeingUpdatedId || user.role === "ADMIN"){
+  //     const newUserInfo = req.body;
+  //     console.log(newUserInfo);
+  //     const result = await User.findByIdAndUpdate(userBeingUpdatedId,newUserInfo);
+  //     console.log(result);
+  //     res.status(200).json({success: true, result});
+  //   } else {
+  //     res.status(401).json({success: false});
+  //   }
+
+  // },
   
   // Authenticate user
   // TODO: Convert to async/await function

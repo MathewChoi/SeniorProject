@@ -22,7 +22,6 @@ router.route('/:id')
 
 router.route('/:id/:floorNumber')
     .put(FacilitiesController.updateFloor)
-    .delete(FacilitiesController.deleteFloor)
-
+    .delete(FacilitiesController.deleteFloor);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Auth from '../Helpers/Authentication';
 
 class Login extends Component {
 
@@ -33,9 +34,13 @@ class Login extends Component {
           
           localStorage.setItem('token', "Bearer " + res.data.token);
           
+          // If user is admin redirect to admin dashboard else redirect to issues page
+          
+          const pathname = Auth.isAdmin() === true ? '/admin/dashboard' : '/issues';
+
           this.props.history
           .push({
-            pathname: '/dashboard',
+            pathname,
             state: { message: res.data.message }
           });
 
