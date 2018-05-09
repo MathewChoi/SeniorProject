@@ -30,10 +30,10 @@ import Footer from './Footer';
 
 const Main = () => (
   <div className="main-panel">
-    <div className="content" style={{marginTop:'0px'}}>
+    <MaterialNavBar />
+    <div className="content mt-0">
       <div className="row">
         <div className="col-md-10 mx-auto">
-          <MaterialNavBar />
           <Switch>
             <Route exact path="/" component={Home}/>
             <PrivateRoute path="/facilities/create" component={CreateFacility} />
