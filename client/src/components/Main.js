@@ -40,7 +40,7 @@ const Main = () => (
             <Route exact path="/" component={Home}/>
           
             <Route exact path="/issues" component={Issues}/>
-            <Route exact path="/facilities" component={Facilities}/>
+            {/* <Route exact path="/facilities" component={Facilities}/> */}
           
             <PrivateRoute exact path="/facilities/create" component={CreateFacility} />
             <PrivateRoute exact path="/facilities/update/:id" component={AddFloor} />  
