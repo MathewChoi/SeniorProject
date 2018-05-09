@@ -13,7 +13,6 @@ class UpdateIssue extends Component {
       building: '',
       floor: '',
       room: '',
-<<<<<<< HEAD
       category: 'PLUMBING',
       facilities: [{
         name:'',
@@ -26,11 +25,9 @@ class UpdateIssue extends Component {
         }]
       }],
       floors:[],
-      rooms:[]
-=======
-      category: '',
+      rooms:[],
+      // category: '',
       status: '',
->>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
     };
   }
   
@@ -40,16 +37,10 @@ componentWillMount() {
     const id = this.props.match.params.id;
     
     axios.get('/api/issues/'+id, header)
-<<<<<<< HEAD
-      .then(res => { 
-          this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category}, () => {
-        })        
-=======
       .then(res => {
         this.setState({name: res.data.name, description: res.data.description, building: res.data.building, floor: res.data.floor, room: res.data.room, category: res.data.category, status: res.data.status}, () => {
           console.log(this.state);
         })
->>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
       })
       .catch(err => console.log(err));
 
@@ -111,10 +102,11 @@ componentWillMount() {
 
   onChange = (event) => {
     const name = event.target.name;
+    let value = event.target.value;
     const state = this.state;
     // apply title capitalization
     if (name==='name') {
-      state[name] = this.toTitleCase(event.target.value);
+      state[name] = this.toTitleCase(value);
     } else if (name === 'building'){
       state['floors'] = this.getFloors(value);
       state[name] = value;
@@ -136,17 +128,7 @@ componentWillMount() {
   
   onSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    const { name, description, building, floor, room, category } = this.state;
-=======
-    let name = this.state.name;
-    let description = this.state.description;
-    let building = this.state.building;
-    let floor = this.state.floor;
-    let room = this.state.room;
-    let category = this.state.category;
-    let status = this.state.status;
->>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
+    const { name, description, building, floor, room, category, status} = this.state;
     const header = { headers: {"Authorization": localStorage.getItem('token')}};
     const id = this.props.match.params.id;
     const data = { name, description, building, floor, room , category, status};
@@ -160,24 +142,21 @@ componentWillMount() {
   }
 
   render() {
-<<<<<<< HEAD
-    let { name, description, building, floor, room, category, facilities, floors, rooms} = this.state;
+    let { name, description, building, floor, room, category, status, facilities, floors, rooms} = this.state;
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const floorlist = floors.map(floor => floor.floorNumber);
     const roomlist = rooms.map(room => room.name);
-=======
-    let name = this.state.name;
-    let description = this.state.description;
-    let building = this.state.building;
-    let floor = this.state.floor;
-    let room = this.state.room;
-    let category = this.state.category;
-    let status = this.state.status;
-    const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
+    // let name = this.state.name;
+    // let description = this.state.description;
+    // let building = this.state.building;
+    // let floor = this.state.floor;
+    // let room = this.state.room;
+    // let category = this.state.category;
+    // let status = this.state.status;
+    // const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
     const isAdmin = Auth.isAdmin();
 
->>>>>>> 1f1cd0c55aae4bb4ba46e941a9bac8ef5d4551bd
     return (
       <div>
         <form className="form-signin" onSubmit={this.onSubmit}>

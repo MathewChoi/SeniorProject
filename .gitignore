@@ -73,3 +73,5 @@ package-lock.json
 package.json
 client/package-lock.json
 client/package.json
+client/package-lock.json
+*.json

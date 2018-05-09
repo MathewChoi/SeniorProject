@@ -44,7 +44,7 @@ class AdminDashboard extends Component {
           <thead>
             <tr>
               <th scope="col">Email</th>
-              <th scope="col"># Issues</th>
+              {/* <th scope="col"># Issues</th> */}
               <th scope="col">Role</th>
               <th scope="col">Created At</th>
               <th scope="col">Updated At</th>
@@ -52,12 +52,13 @@ class AdminDashboard extends Component {
           </thead>
           <tbody>
             {users.map((user, i) => {
-              var fomatted_Created = moment(user.createdAt).format('MM-DD-YYYY hh:mm');
-              var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
-              return (
-                <tr key={i}>
+              if (user !== undefined){
+                var fomatted_Created = moment(user.createdAt).format('MM-DD-YYYY hh:mm');
+                var fomatted_Updated = moment(user.updatedAt).format('MM-DD-YYYY hh:mm');
+                return (
+                  <tr key={i}>
                   <td>{user.email}</td>
-                  <td>{user.issues.length}</td>
+                  {/* <td>{user.issues.length}</td> */}
                   <td>{user.role}</td>
                   <td>{ fomatted_Created }</td>
                   <td>{ fomatted_Updated }</td>
@@ -66,6 +67,7 @@ class AdminDashboard extends Component {
                   </td>
                 </tr>
               )
+              }
             })}
           </tbody>
         </table>
