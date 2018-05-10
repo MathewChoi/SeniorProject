@@ -82,7 +82,7 @@ class Sidebar extends Component {
                   <div className="collapsed" id="facilitiesMenu">
                     <NavLink onClick={this.toggle.bind(this)} to="/facilities">
                       <i className="material-icons">home</i>
-                      <p>Facilities</p>
+                      <p>Campus Directory</p>
                     </NavLink>
                     <NavLink onClick={this.toggle.bind(this)} to="/facilities/create">
                       <i className="material-icons">add</i>

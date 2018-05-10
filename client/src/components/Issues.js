@@ -43,7 +43,7 @@ class Issues extends Component {
     return (
       <div className="card">
         <div className="card-header card-header-primary">
-            <h1 className="card-title ">View all issues</h1>
+            <h1 className="card-title ">View All Issues</h1>
         </div>
         <div className="card-body">
             <div className="table-responsive">

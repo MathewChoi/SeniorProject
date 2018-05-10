@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NavLink from './Helpers/NavLink';
+import Auth from './Helpers/Authentication';
 import axios from 'axios';
 import '../styles/issues.css';
 
@@ -36,7 +38,8 @@ class ListFacilites extends Component {
           return (
             <div >
               <div className="facility-card" key={i}>
-                <Link to={`/issues/facility-issues/${facility.name}`} >
+                {/* <Link to={`/issues/facility-issues/${facility.name}`} > */}
+                <Link to={`/issues/facility-issues/${facility._id}`} >
                   {facility.name}
                 </Link>
               </div>

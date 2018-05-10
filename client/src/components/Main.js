@@ -49,7 +49,8 @@ const Main = () => (
             <PrivateRoute exact path="/issues/create" component={CreateIssue}/>
             <PrivateRoute exact path="/issues/update/:id" component={UpdateIssue}/>
             <Route exact path="/issues/:id" component={ReadIssue}/>
-            <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/>
+            {/* <Route exact path="/issues/facility-issues/:facility" component={FacilitiesIssues}/> */}
+            <Route exact path="/issues/facility-issues/:id" component={FacilitiesIssues}/>            
             <Route exact path="/facilities" component={ListFacilities}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/logout" component={Logout}/>

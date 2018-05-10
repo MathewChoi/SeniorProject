@@ -146,93 +146,183 @@ componentWillMount() {
     const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const floorlist = floors.map(floor => floor.floorNumber);
     const roomlist = rooms.map(room => room.name);
-    // let name = this.state.name;
-    // let description = this.state.description;
-    // let building = this.state.building;
-    // let floor = this.state.floor;
-    // let room = this.state.room;
-    // let category = this.state.category;
-    // let status = this.state.status;
-    // const options = ['PLUMBING', 'ELECTRICAL', 'IT', 'STRUCTURAL', 'MECHANICAL', 'JANITORIAL', 'OTHER'];
     const statusOptions = ['OPEN', 'CLOSED', 'ASSIGNED', 'IN PROGRESS', 'ON HOLD'];
     const isAdmin = Auth.isAdmin();
 
     return (
-      <div>
-        <form className="form-signin" onSubmit={this.onSubmit}>
+      <div className="row">
+      <div className="col-md-6 mx-auto">
+          <div className="card">
+              <div className="card-header card-header-primary">
+                  <h4 className="card-title">Report an Issue</h4>
+                  <p className="card-category">Enter issue information</p>
+              </div>
+              <div className="card-body">
+                  <form onSubmit={this.onSubmit}>
+                      
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Name</label>
+                                <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} required placeholder="Enter the issue name" />
+                              </div>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Description</label>
+                                <input type="text" className="form-control" name ="description" value={description} onChange={this.onChange} required placeholder="Enter a description" />
+                              </div>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Building</label>
+                                <select className="form-control" name="building" value={building} onChange={this.onChange} required="true">
+                                 {(facilities !== undefined) ?
+                                  (facilities.map((facility,i) => {
+                                    const facilityname = facility.name;
+                                    return (
+                                      <option value={facilityname} key={i}>{facilityname}</option>
+                                      ); 
+                                    }))
+                                    :
+                                    (console.log("No facilities are recorded.")
+                                  )}
+                                </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Floor</label>
+                                <select className="form-control" name="floor" value={floor} onChange={this.onChange} required placeholder="required">
+                                  {floorlist.map((option, i) => {
+                                      return (
+                                        <option value={option} key={i}>{option}</option>
+                                      );
+                                    })}
+                                </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Room</label>
+                                <select className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="required">
+                                  {roomlist.map((option, i) => {
+                                    return (
+                                      <option value={option} key={i}>{option}</option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div className="row">
+                          <div className="col-md-12">
+                              <div className="form-group">
+                                <label>Category</label>
+                                <select className="form-control" name="category" value={category} onChange={this.onChange}>
+                                  {options.map((option, i) => {
+                                    return (
+                                      <option value={option} key={i}>{option}</option>
+                                    );
+                                  })}
+                                </select>
+                              </div>
+                          </div>
+                      </div>
 
-          <h2 className="form-signin-heading">Update Issue</h2>
-          <div className="form-group">
-            <label>Name</label>
-            <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} required placeholder="name" />
+                      <div className="text-center">
+                        <button type="submit" className="btn btn-primary pull-right">Submit</button>
+                        <br/>
+                      </div>
+                      <div className="clearfix"></div>
+                  </form>
+              </div>
           </div>
-          <div className="form-group">
-            <label>Description</label>
-            <input type="text" className="form-control" name="description" value={description} onChange={this.onChange} required placeholder="description" />
-          </div>
-          <div className="form-group">
-            <label>Building</label>
-            <select className="form-control" name="building" value={building} onChange={this.onChange} required="true">
-              {
-               (facilities !== undefined) ?
-               (facilities.map((facility,i) => {
-                const facilityname = facility.name;
-                return (
-                  <option value={facilityname} key={i}>{facilityname}</option>
-                  ); 
-                }))
-                :
-                (console.log("No facilities are recorded.")
-              )}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Floor</label>
-            <select className="form-control" name="floor" value={floor} onChange={this.onChange} required placeholder="required">
-              {floorlist.map((option, i) => {
-                  return (
-                    <option value={option} key={i}>{option}</option>
-                  );
-                })}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Room</label>
-            <select className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="required">
-              {roomlist.map((option, i) => {
-                return (
-                  <option value={option} key={i}>{option}</option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Category</label>
-            <select className="form-control" name="category" value={category} onChange={this.onChange}>
-              {options.map((option, i) => {
-                return (
-                  <option value={option} key={i}>{option}</option>
-                )
-              })}
-            </select>
-          </div>
-          { isAdmin && 
-            <div className="form-group">
-              <label>Status</label>
-              <select className="form-control" name="status" value={status} onChange={this.onChange}>
-                {statusOptions.map((option, i) => {
-                  return (
-                    <option value={option} key={i}>{option}</option>
-                  )
-                })}
-              </select>
-            </div>
-          }
-          
-          <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-
-        </form>
       </div>
+    </div>
+      // <div>
+      //   <form className="form-signin" onSubmit={this.onSubmit}>
+
+      //     <h2 className="form-signin-heading">Update Issue</h2>
+      //     <div className="form-group">
+      //       <label>Name</label>
+      //       <input type="text" className="form-control" name="name" value={name} onChange={this.onChange} required placeholder="name" />
+      //     </div>
+      //     <div className="form-group">
+      //       <label>Description</label>
+      //       <input type="text" className="form-control" name="description" value={description} onChange={this.onChange} required placeholder="description" />
+      //     </div>
+      //     <div className="form-group">
+      //       <label>Building</label>
+      //       <select className="form-control" name="building" value={building} onChange={this.onChange} required="true">
+      //         {
+      //          (facilities !== undefined) ?
+      //          (facilities.map((facility,i) => {
+      //           const facilityname = facility.name;
+      //           return (
+      //             <option value={facilityname} key={i}>{facilityname}</option>
+      //             ); 
+      //           }))
+      //           :
+      //           (console.log("No facilities are recorded.")
+      //         )}
+      //       </select>
+      //     </div>
+      //     <div className="form-group">
+      //       <label>Floor</label>
+      //       <select className="form-control" name="floor" value={floor} onChange={this.onChange} required placeholder="required">
+      //         {floorlist.map((option, i) => {
+      //             return (
+      //               <option value={option} key={i}>{option}</option>
+      //             );
+      //           })}
+      //       </select>
+      //     </div>
+      //     <div className="form-group">
+      //       <label>Room</label>
+      //       <select className="form-control" name="room" value={room} onChange={this.onChange} required placeholder="required">
+      //         {roomlist.map((option, i) => {
+      //           return (
+      //             <option value={option} key={i}>{option}</option>
+      //           );
+      //         })}
+      //       </select>
+      //     </div>
+      //     <div className="form-group">
+      //       <label>Category</label>
+      //       <select className="form-control" name="category" value={category} onChange={this.onChange}>
+      //         {options.map((option, i) => {
+      //           return (
+      //             <option value={option} key={i}>{option}</option>
+      //           )
+      //         })}
+      //       </select>
+      //     </div>
+      //     { isAdmin && 
+      //       <div className="form-group">
+      //         <label>Status</label>
+      //         <select className="form-control" name="status" value={status} onChange={this.onChange}>
+      //           {statusOptions.map((option, i) => {
+      //             return (
+      //               <option value={option} key={i}>{option}</option>
+      //             )
+      //           })}
+      //         </select>
+      //       </div>
+      //     }
+          
+      //     <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+
+      //   </form>
+      // </div>
     );
   }
 }
